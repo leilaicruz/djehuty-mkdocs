@@ -8,9 +8,10 @@ theme:
 
 nav:
   - Home: index.md
-  - Introduction: intro.md
-  # - Installation: installation.md
-  # - Usage: usage.md
-  # - API Documentation: api_documentation.md
+  - Introduction: introduction.md
+  - Configuration: running-djehuty.md
+  - Data model: knowledge-graph.md
+  - API Documentation: api.md
+  - Contributing: contributing.md
 
 # Optional: Define additional settings, plugins, and customization
