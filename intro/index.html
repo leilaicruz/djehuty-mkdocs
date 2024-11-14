@@ -1,0 +1,555 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the Djehuty project">
+      
+      
+        <meta name="author" content="Roel Janssen">
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.44">
+    
+    
+      
+        <title>Introduction - Djehuty Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-1introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Djehuty Documentation" class="md-header__button md-logo" aria-label="Djehuty Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Djehuty Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introduction
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Djehuty Documentation" class="md-nav__button md-logo" aria-label="Djehuty Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Djehuty Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-1introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter 1Introduction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Chapter 1Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-obtaining-the-source-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Obtaining the source code
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-installing-the-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Installing the prerequisites
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 Installing the prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-installation-on-enterprise-linux-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.1 Installation on Enterprise Linux 7+
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-installation-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 Installation instructions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-pre-built-containers" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 Pre-built containers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-1introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter 1Introduction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Chapter 1Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-obtaining-the-source-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Obtaining the source code
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-installing-the-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Installing the prerequisites
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 Installing the prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-installation-on-enterprise-linux-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.1 Installation on Enterprise Linux 7+
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-installation-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 Installation instructions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-pre-built-containers" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 Pre-built containers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Introduction</h1>
+
+<h2 id="chapter-1introduction">Chapter 1Introduction</h2>
+<p>djehuty is the data repository system developed by and for 4TU.ResearchData. The name finds its
+inspiration in <a href="https://en.wikipedia.org/wiki/Thoth">Thoth</a>, the Egyptian entity that introduced the idea of writing.</p>
+<h3 id="11-obtaining-the-source-code">1.1  Obtaining the source code</h3>
+<p>The source code can be downloaded at the
+<a href="https://github.com/4TUResearchData/djehuty/releases">Releases</a><a href="djehuty2.html#fn1x1">1</a> 
+page. Make sure to download the djehuty-24.10.1.tar.gz file.
+Or, directly download the tarball using the command-line:</p>
+<pre><code>curl -LO https://github.com/4TUResearchData/djehuty/releases/\  
+download/v24.10.1/djehuty-24.10.1.tar.gz
+</code></pre>
+<p>After obtaining the tarball, it can be unpacked using the tar command:</p>
+<pre><code>tar zxvf djehuty-24.10.1.tar.gz
+</code></pre>
+<h3 id="12-installing-the-prerequisites">1.2  Installing the prerequisites</h3>
+<p>The djehuty program needs Python (version 3.8 or higher) and Git to be installed. Additionally, a couple
+of Python packages need to be installed. The following sections describe installing the prerequisites on
+various GNU/Linux distributions. To put the software in the context of its environment, figure <a href="#x1-5001r1">1.1</a> displays
+the complete run-time dependencies from djehuty to glibc.</p>
+<hr />
+<p><img alt="PIC" src="../figures/0457dd27_1.png" /></p>
+<p>Figure 1.1: Run-time references when constructed with the packages from GNU Guix.   </p>
+<hr />
+<p>The web service of djehuty stores its information in a SPARQL 1.1 (<a href="#Xsparql-11">“SPARQL 1.1 Overview”</a>, <a href="#Xsparql-11">2013</a>) endpoint. We recommend
+either <a href="https://blazegraph.com/">Blazegraph</a><a href="djehuty3.html#fn2x1">2</a> or <a href="http://vos.openlinksw.com/owiki/wiki/VOS">Virtuoso
+open-source edition</a><a href="djehuty4.html#fn3x1">3</a> .</p>
+<h4 id="121-installation-on-enterprise-linux-7">1.2.1  Installation on Enterprise Linux 7+</h4>
+<p>The Python packages on Enterprise Linux version 7 or higher seem to be too far out of date. So installing
+the prerequisites involves two steps.
+The first step involves installing system-wide packages for Python and Git.</p>
+<pre><code>yum install python39 git
+</code></pre>
+<p>The second step involves using Python’s venv module to install the Python packages in a virtual
+environment:</p>
+<pre><code>python3.9 -m venv djehuty-env 
+. djehuty-env/bin/activate 
+cd /path/to/the/repository/checkout/root 
+pip install -r requirements.txt
+</code></pre>
+<h3 id="13-installation-instructions">1.3  Installation instructions</h3>
+<p>After obtaining the source code (see section <a href="#x1-40001.1">1.1</a> ‘<a href="#x1-40001.1">Obtaining the source code</a>’) and installing the
+required tools (see section <a href="#x1-50001.2">1.2</a> ‘<a href="#x1-50001.2">Installing the prerequisites</a>’), building involves running the following
+commands:</p>
+<pre><code>cd djehuty-24.10.1 
+autoreconf -vif # Only needed if the &quot;./configure&quot; step does not work. 
+./configure 
+make 
+make install
+</code></pre>
+<p>To run the make install command, super user privileges may be required. Specify a --prefix to the
+configure script to install the tools to a user-writeable location to avoid needing super user
+privileges.
+After installation, the djehuty program will be available.</p>
+<h3 id="14-pre-built-containers">1.4  Pre-built containers</h3>
+<p>4TU.ResearchData provides Docker container images as a convenience service for each monthly djehuty release.
+The following table outlines the meaning of each image provided. The images are published to <a href="https://hub.docker.com/r/4turesearchdata/djehuty">Docker
+Hub</a><a href="djehuty5.html#fn4x1">4</a> .</p>
+<p>| Image tag | Description |
+| devel | Image meant for development purposes. Before it executes the djehuty  command it checks out the latest codebase. So re-running the same  container image may result in running a different version of djehuty. |
+| latest | This image points to the latest djehuty release. It does not automatically  update the djehuty codebase. |
+| XX.X | 4TU.ResearchData releases a version each month where the number before  the dot refers to the year and the number after the dot refers to the month.  Use a specific version image when you want to upgrade at your own pace. |
+|  |</p>
+<p>To build the container images for yourself, see the build instructions in the ‘docker/Dockerfile’
+file.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>
