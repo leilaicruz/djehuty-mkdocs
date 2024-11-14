@@ -1,0 +1,16 @@
+# mkdocs.yml
+
+site_name: "Djehuty Documentation"
+site_description: "Documentation for the Djehuty project"
+site_author: "Roel Janssen"
+theme:
+  name: material  # Use the mkdocs-material theme, if installed
+
+nav:
+  - Home: index.md
+  - Introduction: intro.md
+  # - Installation: installation.md
+  # - Usage: usage.md
+  # - API Documentation: api_documentation.md
+
+# Optional: Define additional settings, plugins, and customization
