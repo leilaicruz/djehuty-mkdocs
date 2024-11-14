@@ -1,0 +1,1534 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the Djehuty project">
+      
+      
+        <meta name="author" content="Roel Janssen">
+      
+      
+      
+        <link rel="prev" href="../knowledge-graph/">
+      
+      
+        <link rel="next" href="../contributing/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.44">
+    
+    
+      
+        <title>API Documentation - Djehuty Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#application-programming-interface" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Djehuty Documentation" class="md-header__button md-logo" aria-label="Djehuty Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Djehuty Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API Documentation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Djehuty Documentation" class="md-nav__button md-logo" aria-label="Djehuty Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Djehuty Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../running-djehuty/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../knowledge-graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data model
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    API Documentation
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    API Documentation
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-v2-public-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      The /͡v2 public interface
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The /͡v2 public interface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v2articles-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/articles (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2articlessearch-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/articles/search (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2articlesdataset-id-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/articles/\&lt;dataset-id> (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2articlesdataset-idversions-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/articles/\&lt;dataset-id>/versions (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2articlesdataset-idversionsversion-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/articles/\&lt;dataset-id>/versions/\&lt;version> (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2articlesdataset-idversionsversionembargo-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/articles/\&lt;dataset-id>/versions/\&lt;version>/embargo (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2articlesdataset-idfiles-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/articles/\&lt;dataset-id>/files (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2articlesdataset-idfilesfile-id-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/articles/\&lt;dataset-id>/files/\&lt;file-id> (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2collections-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/collections (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2collectionssearch-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/collections/search (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2collectionscollection-id-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/collections/\&lt;collection-id> (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2collectionscollection-idversions-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/collections/\&lt;collection-id>/versions (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2collectionscollection-idversionsversion-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/collections/\&lt;collection-id>/versions/\&lt;version> (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2categories-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/categories (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2licenses-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/licenses (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-v2-private-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      The /͡v2 private interface
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The /͡v2 private interface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v2accountarticles-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/account/articles (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2accountarticles-http_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/account/articles (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-v2-public-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      The /͡v2 public interface
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The /͡v2 public interface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v2articles-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/articles (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2articlessearch-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/articles/search (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2articlesdataset-id-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/articles/\&lt;dataset-id> (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2articlesdataset-idversions-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/articles/\&lt;dataset-id>/versions (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2articlesdataset-idversionsversion-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/articles/\&lt;dataset-id>/versions/\&lt;version> (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2articlesdataset-idversionsversionembargo-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/articles/\&lt;dataset-id>/versions/\&lt;version>/embargo (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2articlesdataset-idfiles-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/articles/\&lt;dataset-id>/files (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2articlesdataset-idfilesfile-id-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/articles/\&lt;dataset-id>/files/\&lt;file-id> (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2collections-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/collections (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2collectionssearch-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/collections/search (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2collectionscollection-id-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/collections/\&lt;collection-id> (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2collectionscollection-idversions-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/collections/\&lt;collection-id>/versions (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2collectionscollection-idversionsversion-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/collections/\&lt;collection-id>/versions/\&lt;version> (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2categories-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/categories (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2licenses-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/licenses (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-v2-private-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      The /͡v2 private interface
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The /͡v2 private interface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v2accountarticles-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/account/articles (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2accountarticles-http_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      /͡v2/account/articles (HTTP )
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="application-programming-interface">Application Programming Interface</h1>
+<p>The application programming interface (API) provided by d͡jehuty allows
+for automating tasks otherwise done through the user interface. In
+addition to automation, the API can also be used to gather additional
+information, like statistics on Git repositories.</p>
+<p>Throughout this chapter we provide examples for using the API using c͡url
+and j͡q. Another way of seeing the API in action is to use the developer
+tools in a web browser while performing the desired action using the web
+user interface.</p>
+<h2 id="the-v2-public-interface">The /͡v2 public interface</h2>
+<p>The v͡2 API was designed by Figshare[^1]. d͡jehuty implements a
+backward-compatible version of it, with the following differences:</p>
+<ol>
+<li>
+<p>The i͡d property is superseded by the u͡uid property.</p>
+</li>
+<li>
+<p>Error handling is done through precise HTTP error codes, rather than
+    always returning 4͡00 on a usage error.</p>
+</li>
+</ol>
+<p>Unless specified otherwise, the HTTP C͡ontent-Type to interact with the
+API is a͡pplication/json. In the case an API call returns information,
+don’t forget to set the HTTP A͡ccept header appropriately.</p>
+<h3 id="v2articles-http">/͡v2/articles (HTTP )</h3>
+<p>The following parameters can be used:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Parameter</strong></td>
+<td style="text-align: left;"><strong>Required</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">o͡rder</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">Field to use for sorting.</td>
+</tr>
+<tr>
+<td style="text-align: left;">o͡rder_direction</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">Can be either or .</td>
+</tr>
+<tr>
+<td style="text-align: left;">i͡nstitution</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The institution identifier to filter on.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡ublished_since</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">When set, datasets published before this timestamp are dropped from the results.</td>
+</tr>
+<tr>
+<td style="text-align: left;">m͡odified_since</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">When set, only datasets modified after this timestamp are shown from the results.</td>
+</tr>
+<tr>
+<td style="text-align: left;">g͡roup</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The group identifier to filter on.</td>
+</tr>
+<tr>
+<td style="text-align: left;">r͡esource_doi</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The DOI of the associated journal publication. When set, only returns datasets associated with this DOI.</td>
+</tr>
+<tr>
+<td style="text-align: left;">i͡tem_type</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">Either for datasets or for software.</td>
+</tr>
+<tr>
+<td style="text-align: left;">d͡oi</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The DOI of the dataset to search for.</td>
+</tr>
+<tr>
+<td style="text-align: left;">h͡andle</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">Unused.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡age</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The page number used in combination with p͡age_size.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡age_size</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The number of datasets per page. Used in combination with p͡age.</td>
+</tr>
+<tr>
+<td style="text-align: left;">l͡imit</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The maximum number of datasets to output. Used together with o͡ffset.</td>
+</tr>
+<tr>
+<td style="text-align: left;">o͡ffset</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The number of datasets to skip in the output. Used together with l͡imit.</td>
+</tr>
+</tbody>
+</table>
+<p>Example usage:</p>
+<pre><code class="language-bash">curl &quot;(@*\djehutybaseurl{}*@)/v2/articles?limit=100&amp;published_since=2024-07-25&quot; | jq
+</code></pre>
+<p>Output of the example:</p>
+<pre><code class="language-JSON">[ /* Example output has been shortened. */
+  {
+    &quot;id&quot;: null,
+    &quot;uuid&quot;: &quot;4f8a9423-83fc-4263-9bb7-2aa83d73865d&quot;,
+    &quot;title&quot;: &quot;Measurement data of a Low Speed Field Test of Tractor Se...&quot;,
+    &quot;doi&quot;: &quot;10.4121/4f8a9423-83fc-4263-9bb7-2aa83d73865d.v1&quot;,
+    &quot;handle&quot;: null,
+    &quot;url&quot;: &quot;(@*\djehutybaseurl{}*@)/v2/articles/4f8a...865d&quot;,
+    &quot;published_date&quot;: &quot;2024-07-26T10:39:57&quot;,
+    &quot;thumb&quot;: null,
+    &quot;defined_type&quot;: 3,
+    &quot;defined_type_name&quot;: &quot;dataset&quot;,
+    &quot;group_id&quot;: 28589,
+    &quot;url_private_api&quot;: &quot;(@*\djehutybaseurl{}*@)/v2/account/articles/4f8a...865d&quot;,
+    &quot;url_public_api&quot;: &quot;(@*\djehutybaseurl{}*@)/v2/articles/4f8a...865d&quot;,
+    &quot;url_private_html&quot;: &quot;(@*\djehutybaseurl{}*@)/my/datasets/4f8a...865d/edit&quot;,
+    &quot;url_public_html&quot;: &quot;(@*\djehutybaseurl{}*@)/datasets/4f8a...865d/1&quot;,
+    ...
+  }
+]
+</code></pre>
+<h3 id="v2articlessearch-http">/͡v2/articles/search (HTTP )</h3>
+<p>In addition to the parameters of section , the following parameters can
+be used.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Parameter</strong></td>
+<td style="text-align: left;"><strong>Required</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">s͡earch_for</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The terms to search for.</td>
+</tr>
+</tbody>
+</table>
+<p>Example usage:</p>
+<pre><code class="language-bash">curl --request POST\
+     --header &quot;Content-Type: application/json&quot;\
+     --data '{ &quot;search_for&quot;: &quot;djehuty&quot; }'\
+     (@*\djehutybaseurl{}*@)/v2/articles/search | jq
+</code></pre>
+<p>Output of the example:</p>
+<pre><code class="language-JSON">[ /* Example output has been shortened. */
+  {
+    &quot;id&quot;: null,
+    &quot;uuid&quot;: &quot;342efadc-66f8-4e9b-9d27-da7b28b849d2&quot;,
+    &quot;title&quot;: &quot;Source code of the 4TU.ResearchData repository&quot;,
+    &quot;doi&quot;: &quot;10.4121/342efadc-66f8-4e9b-9d27-da7b28b849d2.v1&quot;,
+    &quot;handle&quot;: null,
+    &quot;url&quot;: &quot;(@*\djehutybaseurl{}*@)/v2/articles/342e...49d2&quot;,
+    &quot;published_date&quot;: &quot;2023-03-20T11:29:10&quot;,
+    &quot;thumb&quot;: null,
+    &quot;defined_type&quot;: 9,
+    &quot;defined_type_name&quot;: &quot;software&quot;,
+    &quot;group_id&quot;: 28586,
+    &quot;url_private_api&quot;: &quot;(@*\djehutybaseurl{}*@)/v2/account/articles/342e...49d2&quot;,
+    &quot;url_public_api&quot;: &quot;(@*\djehutybaseurl{}*@)/v2/articles/342e...49d2&quot;,
+    &quot;url_private_html&quot;: &quot;(@*\djehutybaseurl{}*@)/my/datasets/342e...49d2/edit&quot;,
+    &quot;url_public_html&quot;: &quot;(@*\djehutybaseurl{}*@)/datasets/342e...49d2/1&quot;,
+    ...
+  }
+]
+</code></pre>
+<h3 id="v2articlesdataset-id-http">/͡v2/articles/\&lt;dataset-id&gt; (HTTP )</h3>
+<p>Example usage:</p>
+<pre><code class="language-bash">curl (@*\djehutybaseurl{}*@)/v2/articles/342efadc-66f8-4e9b-9d27-da7b28b849d2 | jq
+</code></pre>
+<p>Output of the example:</p>
+<pre><code class="language-JSON">{ /* Example output has been shortened. */
+  &quot;files&quot;: ...,
+  &quot;custom_fields&quot;: ...,
+  &quot;authors&quot;: ...,
+  &quot;description&quot;: &quot;&lt;p&gt;This dataset contains the source code of the 4TU...&quot;,
+  &quot;license&quot;: ...,
+  &quot;tags&quot;: ...,
+  &quot;categories&quot;: ...,
+  &quot;references&quot;: ...,
+  &quot;id&quot;: null,
+  &quot;uuid&quot;: &quot;342efadc-66f8-4e9b-9d27-da7b28b849d2&quot;,
+  &quot;title&quot;: &quot;Source code of the 4TU.ResearchData repository&quot;,
+  &quot;doi&quot;: &quot;10.4121/342efadc-66f8-4e9b-9d27-da7b28b849d2.v1&quot;,
+  &quot;url&quot;: &quot;(@*\djehutybaseurl{}*@)/v2/articles/342e...49d2&quot;,
+  &quot;published_date&quot;: &quot;2023-03-20T11:29:10&quot;,
+  &quot;timeline&quot;: ...,
+  ...
+}
+</code></pre>
+<h3 id="v2articlesdataset-idversions-http">/͡v2/articles/\&lt;dataset-id&gt;/versions (HTTP )</h3>
+<p>Example usage:</p>
+<pre><code class="language-bash">curl (@*\djehutybaseurl{}*@)/v2/articles/342efadc-66f8-4e9b-9d27-da7b28b849d2/versions | jq
+</code></pre>
+<p>Output of the example:</p>
+<pre><code class="language-JSON">[
+  {
+    &quot;version&quot;: 1,
+    &quot;url&quot;: &quot;(@*\djehutybaseurl{}*@)/v2/articles/342efadc-66f8-4e9b-9d27-da7b28b849d2/versions/1&quot;
+  }
+]
+</code></pre>
+<h3 id="v2articlesdataset-idversionsversion-http">/͡v2/articles/\&lt;dataset-id&gt;/versions/\&lt;version&gt; (HTTP )</h3>
+<p>Example usage:</p>
+<pre><code class="language-bash">curl (@*\djehutybaseurl{}*@)/v2/articles/342efadc-66f8-4e9b-9d27-da7b28b849d2/versions/1 | jq
+</code></pre>
+<p>The output of the example is identical to the example output of section
+.</p>
+<h3 id="v2articlesdataset-idversionsversionembargo-http">/͡v2/articles/\&lt;dataset-id&gt;/versions/\&lt;version&gt;/embargo (HTTP )</h3>
+<p>Example usage:</p>
+<pre><code class="language-bash">curl (@*\djehutybaseurl{}*@)/v2/articles/c1274889-b797-43bd-a3b1-ee0611d58fd7/versions/2/embargo | jq
+</code></pre>
+<p>Output of the example:</p>
+<pre><code class="language-JSON">{
+  &quot;is_embargoed&quot;: true,
+  &quot;embargo_date&quot;: &quot;2039-06-30&quot;,
+  &quot;embargo_type&quot;: &quot;article&quot;,
+  &quot;embargo_title&quot;: &quot;Under embargo&quot;,
+  &quot;embargo_reason&quot;: &quot;&lt;p&gt;Need consent to publish the data&lt;/p&gt;&quot;,
+  &quot;embargo_options&quot;: []
+}
+</code></pre>
+<h3 id="v2articlesdataset-idfiles-http">/͡v2/articles/\&lt;dataset-id&gt;/files (HTTP )</h3>
+<p>Example usage:</p>
+<pre><code class="language-bash">curl (@*\djehutybaseurl{}*@)/v2/articles/342efadc-66f8-4e9b-9d27-da7b28b849d2/files
+</code></pre>
+<p>Output of the example:</p>
+<pre><code class="language-JSON">[ /* Example output has been shortened. */
+  {
+    &quot;id&quot;: null,
+    &quot;uuid&quot;: &quot;d3e1c325-7fa9-4cb9-884e-0b9cd2059292&quot;,
+    &quot;name&quot;: &quot;djehuty-0.0.1.tar.gz&quot;,
+    &quot;size&quot;: 3713709,
+    &quot;is_link_only&quot;: false,
+    &quot;is_incomplete&quot;: false,
+    &quot;download_url&quot;: &quot;(@*\djehutybaseurl{}*@)/file/342e...49d2/d3e1...9292&quot;,
+    &quot;supplied_md5&quot;: null,
+    &quot;computed_md5&quot;: &quot;910e9b0f79a0af548f59b3d8a56c3bf4&quot;
+  }
+]
+</code></pre>
+<h3 id="v2articlesdataset-idfilesfile-id-http">/͡v2/articles/\&lt;dataset-id&gt;/files/\&lt;file-id&gt; (HTTP )</h3>
+<p>Example usage:</p>
+<pre><code class="language-bash">curl (@*\djehutybaseurl{}*@)/v2/articles/342e...49d2/files/d3e1...9292 | jq
+</code></pre>
+<p>Output of the example:</p>
+<pre><code class="language-JSON">{ /* Example output has been shortened. */
+  &quot;id&quot;: null,
+  &quot;uuid&quot;: &quot;d3e1c325-7fa9-4cb9-884e-0b9cd2059292&quot;,
+  &quot;name&quot;: &quot;djehuty-0.0.1.tar.gz&quot;,
+  &quot;size&quot;: 3713709,
+  &quot;is_link_only&quot;: false,
+  &quot;is_incomplete&quot;: false,
+  &quot;download_url&quot;: &quot;(@*\djehutybaseurl{}*@)/file/342e...49d2/d3e1...9292&quot;,
+  &quot;supplied_md5&quot;: null,
+  &quot;computed_md5&quot;: &quot;910e9b0f79a0af548f59b3d8a56c3bf4&quot;
+}
+</code></pre>
+<h3 id="v2collections-http">/͡v2/collections (HTTP )</h3>
+<p>The following parameters can be used:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Parameter</strong></td>
+<td style="text-align: left;"><strong>Required</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">o͡rder</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">Field to use for sorting.</td>
+</tr>
+<tr>
+<td style="text-align: left;">o͡rder_direction</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">Can be either or .</td>
+</tr>
+<tr>
+<td style="text-align: left;">i͡nstitution</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The institution identifier to filter on.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡ublished_since</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">When set, collections published before this timestamp are dropped from the results.</td>
+</tr>
+<tr>
+<td style="text-align: left;">m͡odified_since</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">When set, only collections modified after this timestamp are shown from the results.</td>
+</tr>
+<tr>
+<td style="text-align: left;">g͡roup</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The group identifier to filter on.</td>
+</tr>
+<tr>
+<td style="text-align: left;">r͡esource_doi</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The DOI of the associated journal publication. When set, only returns collections associated with this DOI.</td>
+</tr>
+<tr>
+<td style="text-align: left;">d͡oi</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The DOI of the collection to search for.</td>
+</tr>
+<tr>
+<td style="text-align: left;">h͡andle</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">Unused.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡age</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The page number used in combination with p͡age_size.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡age_size</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The number of collections per page. Used in combination with p͡age.</td>
+</tr>
+<tr>
+<td style="text-align: left;">l͡imit</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The maximum number of collections to output. Used together with o͡ffset.</td>
+</tr>
+<tr>
+<td style="text-align: left;">o͡ffset</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The number of collections to skip in the output. Used together with l͡imit.</td>
+</tr>
+</tbody>
+</table>
+<p>Example usage:</p>
+<pre><code class="language-bash">curl &quot;(@*\djehutybaseurl{}*@)/v2/collections?limit=100&amp;published_since=2024-07-25&quot; | jq
+</code></pre>
+<p>Output of the example:</p>
+<pre><code class="language-JSON">[ /* Example output has been shortened. */
+  {
+    &quot;id&quot;: null,
+    &quot;uuid&quot;: &quot;0fe9ab80-6e6a-4087-a509-ce09dddfa3d9&quot;,
+    &quot;title&quot;: &quot;PhD research 'Untangling the complexity of local water ...'&quot;,
+    &quot;doi&quot;: &quot;10.4121/0fe9ab80-6e6a-4087-a509-ce09dddfa3d9.v1&quot;,
+    &quot;handle&quot;: &quot;&quot;,
+    &quot;url&quot;: &quot;(@*\djehutybaseurl{}*@)/v2/collections/0fe9...fa3d9&quot;,
+    &quot;timeline&quot;: {
+      &quot;posted&quot;: &quot;2024-08-13T14:09:52&quot;,
+      &quot;firstOnline&quot;: &quot;2024-08-13T14:09:51&quot;,
+      ...
+    },
+    &quot;published_date&quot;: &quot;2024-08-13T14:09:52&quot;
+  },
+  ...
+]
+</code></pre>
+<h3 id="v2collectionssearch-http">/͡v2/collections/search (HTTP )</h3>
+<p>In addition to the parameters of section , the following parameters can
+be used.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Parameter</strong></td>
+<td style="text-align: left;"><strong>Required</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">s͡earch_for</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The terms to search for.</td>
+</tr>
+</tbody>
+</table>
+<p>Example usage:</p>
+<pre><code class="language-bash">curl --request POST\
+     --header &quot;Content-Type: application/json&quot;\
+     --data '{ &quot;search_for&quot;: &quot;wingtips&quot; }'\
+     (@*\djehutybaseurl{}*@)/v2/collections/search | jq
+</code></pre>
+<p>Output of the example:</p>
+<pre><code class="language-JSON">[  /* Example output has been shortened. */
+  {
+    &quot;id&quot;: 6070238,
+    &quot;uuid&quot;: &quot;3dfc4ef2-7f79-4d33-81a7-9c6ae09a2782&quot;,
+    &quot;title&quot;: &quot;Flared Folding Wingtips - TU Delft&quot;,
+    &quot;doi&quot;: &quot;10.4121/c.6070238.v1&quot;,
+    &quot;handle&quot;: &quot;&quot;,
+    &quot;url&quot;: &quot;(@*\djehutybaseurl{}*@)/v2/collections/3dfc...2782&quot;,
+    &quot;timeline&quot;: {
+      &quot;posted&quot;: &quot;2023-04-05T15:05:04&quot;,
+      &quot;firstOnline&quot;: &quot;2023-04-05T15:05:03&quot;,
+      ...
+    },
+    &quot;published_date&quot;: &quot;2023-04-05T15:05:04&quot;
+  },
+  ...
+]
+</code></pre>
+<h3 id="v2collectionscollection-id-http">/͡v2/collections/\&lt;collection-id&gt; (HTTP )</h3>
+<p>Example usage:</p>
+<pre><code class="language-bash">curl (@*\djehutybaseurl{}*@)/v2/collections/3dfc4ef2-7f79-4d33-81a7-9c6ae09a2782 | jq
+</code></pre>
+<p>Output of the example:</p>
+<pre><code class="language-JSON">{ /* Example output has been shortened. */
+  &quot;version&quot;: 3,
+  ...
+  &quot;description&quot;: &quot;&lt;p&gt;This collection contains the results of the work ...&quot;,
+  &quot;categories&quot;: [ ... ],
+  &quot;references&quot;: [],
+  &quot;tags&quot;: [ ... ],
+  &quot;created_date&quot;: &quot;2024-08-08T15:48:55&quot;,
+  &quot;modified_date&quot;: &quot;2024-08-12T11:24:39&quot;,
+  &quot;id&quot;: 6070238,
+  &quot;uuid&quot;: &quot;3dfc4ef2-7f79-4d33-81a7-9c6ae09a2782&quot;,
+  &quot;title&quot;: &quot;Flared Folding Wingtips - TU Delft&quot;,
+  &quot;doi&quot;: &quot;10.4121/c.6070238.v3&quot;,
+  &quot;published_date&quot;: &quot;2024-08-12T11:24:40&quot;,
+  &quot;timeline&quot;: ...
+  ...
+}
+</code></pre>
+<h3 id="v2collectionscollection-idversions-http">/͡v2/collections/\&lt;collection-id&gt;/versions (HTTP )</h3>
+<p>Example usage:</p>
+<pre><code class="language-bash">curl (@*\djehutybaseurl{}*@)/v2/collections/3dfc4ef2-7f79-4d33-81a7-9c6ae09a2782/versions | jq
+</code></pre>
+<p>Output of the example:</p>
+<pre><code class="language-JSON">[ /* Example output has been shortened. */
+  {
+    &quot;version&quot;: 3,
+    &quot;url&quot;: &quot;(@*\djehutybaseurl{}*@)/v2/collections/3dfc...2782/versions/3&quot;
+  },
+  {
+    &quot;version&quot;: 2,
+    &quot;url&quot;: &quot;(@*\djehutybaseurl{}*@)/v2/collections/3dfc...2782/versions/2&quot;
+  },
+  {
+    &quot;version&quot;: 1,
+    &quot;url&quot;: &quot;(@*\djehutybaseurl{}*@)/v2/collections/3dfc...2782/versions/1&quot;
+  }
+]
+</code></pre>
+<h3 id="v2collectionscollection-idversionsversion-http">/͡v2/collections/\&lt;collection-id&gt;/versions/\&lt;version&gt; (HTTP )</h3>
+<p>Example usage:</p>
+<pre><code class="language-bash">curl (@*\djehutybaseurl{}*@)/v2/collections/3dfc4ef2-7f79-4d33-81a7-9c6ae09a2782/versions/2 | jq
+</code></pre>
+<p>Output of the example:</p>
+<pre><code class="language-JSON">{ /* Example output has been shortened. */
+  &quot;version&quot;: 2,
+  ...
+  &quot;description&quot;: &quot;&lt;p&gt;This collection contains the results of the work ...&quot;,
+  &quot;categories&quot;: [ ... ],
+  &quot;references&quot;: [],
+  &quot;tags&quot;: [ ... ],
+  &quot;references&quot;: [],
+  &quot;tags&quot;: [ ... ],
+  &quot;authors&quot;: [ ... ],
+  &quot;created_date&quot;: &quot;2023-04-05T15:07:35&quot;,
+  &quot;modified_date&quot;: &quot;2023-05-26T15:19:11&quot;,
+  &quot;id&quot;: 6070238,
+  &quot;uuid&quot;: &quot;3dfc4ef2-7f79-4d33-81a7-9c6ae09a2782&quot;,
+  &quot;title&quot;: &quot;Flared Folding Wingtips - TU Delft&quot;,
+  &quot;doi&quot;: &quot;10.4121/c.6070238.v2&quot;,
+  ...
+}
+</code></pre>
+<h3 id="v2categories-http">/͡v2/categories (HTTP )</h3>
+<p>Each dataset and collection is categorized using a controlled vocabulary
+of categories. This API endpoint provides those categories.</p>
+<p>Example usage:</p>
+<pre><code class="language-bash">curl (@*\djehutybaseurl{}*@)/v2/categories | jq
+</code></pre>
+<p>Output of the example:</p>
+<pre><code class="language-JSON">[ /* Example output has been shortened. */
+  {
+    &quot;id&quot;: 13622,
+    &quot;uuid&quot;: &quot;01fddd41-68d2-4e28-9d9c-18347847e7d1&quot;,
+    &quot;title&quot;: &quot;Mining and Extraction of Energy Resources&quot;,
+    &quot;parent_id&quot;: 13620,
+    &quot;parent_uuid&quot;: &quot;6e5bdc69-96db-41e4-ac0b-18812b46c49c&quot;,
+    &quot;path&quot;: &quot;&quot;,
+    &quot;source_id&quot;: null,
+    &quot;taxonomy_id&quot;: null
+  },
+  {
+    &quot;id&quot;: 13443,
+    &quot;uuid&quot;: &quot;026f555c-2826-4a83-97ff-0f230fb54ddb&quot;,
+    &quot;title&quot;: &quot;Livestock Raising&quot;,
+    &quot;parent_id&quot;: 13440,
+    &quot;parent_uuid&quot;: &quot;45a8c849-ab59-4302-af79-09b8c0677df8&quot;,
+    &quot;path&quot;: &quot;&quot;,
+    &quot;source_id&quot;: null,
+    &quot;taxonomy_id&quot;: null
+  },
+  ...
+]
+</code></pre>
+<h3 id="v2licenses-http">/͡v2/licenses (HTTP )</h3>
+<p>Publishing a dataset involves communicating under which conditions it
+can be re-used. The licenses under which you can publish a dataset can
+be found with this API endpoint.</p>
+<p>Example usage:</p>
+<pre><code class="language-bash">curl (@*\djehutybaseurl{}*@)/v2/licenses | jq
+</code></pre>
+<p>Output of the example:</p>
+<pre><code class="language-JSON">[ /* Example output has been shortened. */
+  {
+    &quot;value&quot;: 1,
+    &quot;name&quot;: &quot;CC BY 4.0&quot;,
+    &quot;url&quot;: &quot;https://creativecommons.org/licenses/by/4.0/&quot;,
+    &quot;type&quot;: &quot;data&quot;
+  },
+  {
+    &quot;value&quot;: 10,
+    &quot;name&quot;: &quot;CC BY-NC 4.0&quot;,
+    &quot;url&quot;: &quot;https://creativecommons.org/licenses/by-nc/4.0/&quot;,
+    &quot;type&quot;: &quot;data&quot;
+  },
+  ...
+]
+</code></pre>
+<h2 id="the-v2-private-interface">The /͡v2 private interface</h2>
+<p>The interaction with the v͡2 private interface API requires an API token.
+Such a token can be obtained from the dashboard page after logging in.
+This token can then be passed along in the A͡uthorization HTTP header as:</p>
+<pre><code>Authorization: token YOUR_TOKEN_HERE
+</code></pre>
+<h3 id="v2accountarticles-http">/͡v2/account/articles (HTTP )</h3>
+<p>This API endpoint lists the draft datasets of the account to which the
+authorization token belongs.</p>
+<p>The following parameters can be used:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Parameter</strong></td>
+<td style="text-align: left;"><strong>Required</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡age</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The page number used in combination with p͡age_size.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡age_size</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The number of datasets per page. Used in combination with p͡age.</td>
+</tr>
+<tr>
+<td style="text-align: left;">l͡imit</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The maximum number of datasets to output. Used together with o͡ffset.</td>
+</tr>
+<tr>
+<td style="text-align: left;">o͡ffset</td>
+<td style="text-align: left;">Optional</td>
+<td style="text-align: left;">The number of datasets to skip in the output. Used together with l͡imit.</td>
+</tr>
+</tbody>
+</table>
+<p>Example usage:</p>
+<pre><code class="language-bash">curl -H &quot;Authorization: token YOUR_TOKEN_HERE&quot; (@*\djehutybaseurl{}*@)/v2/account/articles | jq
+</code></pre>
+<p>Output of the example:</p>
+<pre><code class="language-JSON">{ /* Example output has been shortened. */
+  &quot;id&quot;: null,
+  &quot;uuid&quot;: &quot;6ddd7a31-8ad8-4c20-95a3-e68fe716fa42&quot;,
+  &quot;title&quot;: &quot;Example draft dataset&quot;,
+  &quot;doi&quot;: null,
+  &quot;handle&quot;: null,
+  &quot;url&quot;: &quot;(@*\djehutybaseurl{}*@)/v2/articles/6ddd7a31-8ad8-4c20-95a3-e68fe716fa42&quot;,
+  &quot;published_date&quot;: null,
+  ...
+}
+</code></pre>
+<h3 id="v2accountarticles-http_1">/͡v2/account/articles (HTTP )</h3>
+<p>This API endpoint can be used to create a new dataset.</p>
+<p>The following parameters can be used:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Parameter</strong></td>
+<td style="text-align: left;"><strong>Data type</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">t͡itle</td>
+<td style="text-align: left;">s͡tring</td>
+<td style="text-align: left;">The title of the dataset.</td>
+</tr>
+<tr>
+<td style="text-align: left;">d͡escription</td>
+<td style="text-align: left;">s͡tring</td>
+<td style="text-align: left;">A description of the dataset.</td>
+</tr>
+<tr>
+<td style="text-align: left;">t͡ags</td>
+<td style="text-align: left;">list of s͡trings</td>
+<td style="text-align: left;">Keywords to enhance the findability of the dataset. Instead of using the key , you may also use the key .</td>
+</tr>
+<tr>
+<td style="text-align: left;">r͡eferences</td>
+<td style="text-align: left;">list of s͡trings</td>
+<td style="text-align: left;">URLs to resources referring to this dataset, or resources that this dataset refers to.</td>
+</tr>
+<tr>
+<td style="text-align: left;">c͡ategories</td>
+<td style="text-align: left;">list of s͡trings</td>
+<td style="text-align: left;">Categories are a controlled vocabulary and can be used to make the dataset findable in the categorical overviews. The s͡tring values expected here can be found under the property with a call to . For more details, see section .</td>
+</tr>
+<tr>
+<td style="text-align: left;">a͡uthors</td>
+<td style="text-align: left;">list of author records</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">d͡efined_type</td>
+<td style="text-align: left;">s͡tring</td>
+<td style="text-align: left;">One of: f͡igure, o͡nline resource, p͡reprint, b͡ook, c͡onference contribution, m͡edia, d͡ataset, p͡oster, j͡ournal contribution, p͡resentation, t͡hesis or s͡oftware.</td>
+</tr>
+<tr>
+<td style="text-align: left;">f͡unding</td>
+<td style="text-align: left;">s͡tring</td>
+<td style="text-align: left;">One-liner to cite funding.</td>
+</tr>
+<tr>
+<td style="text-align: left;">f͡unding_list</td>
+<td style="text-align: left;">list of funding records</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">l͡icense</td>
+<td style="text-align: left;">i͡nteger</td>
+<td style="text-align: left;">Licences communicate under which conditions the dataset can be re-used. The i͡nteger value to submit here can be found as the v͡alue property in a call to . For more details, see section .</td>
+</tr>
+<tr>
+<td style="text-align: left;">d͡oi</td>
+<td style="text-align: left;">s͡tring</td>
+<td style="text-align: left;">Do not use this field as a DOI will be automatically assigned upon publication..</td>
+</tr>
+<tr>
+<td style="text-align: left;">h͡andle</td>
+<td style="text-align: left;">s͡tring</td>
+<td style="text-align: left;">Do not use this field as it is deprecated.</td>
+</tr>
+<tr>
+<td style="text-align: left;">r͡esource_doi</td>
+<td style="text-align: left;">s͡tring</td>
+<td style="text-align: left;">The URL of the DOI of an associated peer-reviewed journal publication.</td>
+</tr>
+<tr>
+<td style="text-align: left;">r͡esource_title</td>
+<td style="text-align: left;">s͡tring</td>
+<td style="text-align: left;">The title of the associated peer-reviewed journal publication.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡ublisher</td>
+<td style="text-align: left;">s͡tring</td>
+<td style="text-align: left;">The name of the data repository publishing the dataset.</td>
+</tr>
+<tr>
+<td style="text-align: left;">c͡ustom_fields</td>
+<td style="text-align: left;">list of key-value pairs</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">t͡imeline</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Do not use this field because it will be automatically populated during the publication process.</td>
+</tr>
+</tbody>
+</table>
+<p>[^1]:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>

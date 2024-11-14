@@ -1,0 +1,1592 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the Djehuty project">
+      
+      
+        <meta name="author" content="Roel Janssen">
+      
+      
+      
+        <link rel="prev" href="../introduction/">
+      
+      
+        <link rel="next" href="../knowledge-graph/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.44">
+    
+    
+      
+        <title>Configuration - Djehuty Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#configuring" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Djehuty Documentation" class="md-header__button md-logo" aria-label="Djehuty Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Djehuty Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Configuration
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Djehuty Documentation" class="md-nav__button md-logo" aria-label="Djehuty Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Djehuty Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#essential-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Essential options
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-the-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring the Database
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#audit-trails-and-database-reconstruction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Audit trails and database reconstruction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Audit trails and database reconstruction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reconstructing-the-database-from-the-query-audit-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reconstructing the database from the query audit log
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring storage
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-an-identity-provider" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring an identity provider
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring an identity provider">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#saml20" class="md-nav__link">
+    <span class="md-ellipsis">
+      SAML2.0
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SAML2.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-attributes-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      The a͡ttributes configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-sram-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      The s͡ram configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-service-provider-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      The s͡ervice-provider configuration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#orcid" class="md-nav__link">
+    <span class="md-ellipsis">
+      ORCID
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-an-e-mail-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring an e-mail server
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-doi-registration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring DOI registration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-handle-registration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring Handle registration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-iiif-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring IIIF support
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customizing-looks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customizing looks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Customizing looks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#customizing-colors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customizing colors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-privileged-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring privileged users
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../knowledge-graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data model
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Documentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#essential-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Essential options
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-the-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring the Database
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#audit-trails-and-database-reconstruction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Audit trails and database reconstruction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Audit trails and database reconstruction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reconstructing-the-database-from-the-query-audit-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reconstructing the database from the query audit log
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring storage
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-an-identity-provider" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring an identity provider
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring an identity provider">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#saml20" class="md-nav__link">
+    <span class="md-ellipsis">
+      SAML2.0
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SAML2.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-attributes-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      The a͡ttributes configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-sram-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      The s͡ram configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-service-provider-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      The s͡ervice-provider configuration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#orcid" class="md-nav__link">
+    <span class="md-ellipsis">
+      ORCID
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-an-e-mail-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring an e-mail server
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-doi-registration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring DOI registration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-handle-registration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring Handle registration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-iiif-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring IIIF support
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customizing-looks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customizing looks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Customizing looks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#customizing-colors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customizing colors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-privileged-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring privileged users
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="configuring">Configuring</h1>
+<p>Now that is installed, it’s a good moment to look into its run-time
+configuration options. All configuration can be done through a
+configuration file, for which an example is available at .</p>
+<h2 id="essential-options">Essential options</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Option</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">b͡ind-address</td>
+<td style="text-align: left;">The address to bind a TCP socket on.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡ort</td>
+<td style="text-align: left;">The port to bind a TCK socket on.</td>
+</tr>
+<tr>
+<td style="text-align: left;">b͡ase-url</td>
+<td style="text-align: left;">The URL on which the instance will be available to the outside world.</td>
+</tr>
+<tr>
+<td style="text-align: left;">a͡llow-crawlers</td>
+<td style="text-align: left;">Set to 1 to allow crawlers in the r͡obots.txt, otherwise set to 0.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡roduction</td>
+<td style="text-align: left;">Performs extra checks before starting. Enable this when running a production instance.</td>
+</tr>
+<tr>
+<td style="text-align: left;">l͡ive-reload</td>
+<td style="text-align: left;">When set to 1, it reloads Python code on-the-fly. We recommend to set it to 0 when running in production.</td>
+</tr>
+<tr>
+<td style="text-align: left;">d͡ebug-mode</td>
+<td style="text-align: left;">When set to 1, it will display backtraces and error messages in the web browser. When set to 0, it will only show backtraces and error messages in the web browser.</td>
+</tr>
+<tr>
+<td style="text-align: left;">u͡se-x-forwarded-for</td>
+<td style="text-align: left;">When running d͡jehuty behind a reverse-proxy server, use the HTTP header X͡-Forwarded-For to log IP address information.</td>
+</tr>
+<tr>
+<td style="text-align: left;">d͡isable-collaboration</td>
+<td style="text-align: left;">When set to 1, it disables the “collaborators” feature.</td>
+</tr>
+<tr>
+<td style="text-align: left;">a͡llowed-depositing-domains</td>
+<td style="text-align: left;">When unset, any authenticated user may deposit data. Otherwise, this option limits the ability to deposit to users with an e-mail address of the listed domain names.</td>
+</tr>
+<tr>
+<td style="text-align: left;">c͡ache-root</td>
+<td style="text-align: left;">d͡jehuty can cache query responses to lower the load on the database server. Specify the directory where to store cache files. This element takes an attribute c͡lear-on-start, and when set to 1, it will remove all cache files on start-up of d͡jehuty.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡rofile-images-root</td>
+<td style="text-align: left;">Users can upload a profile image in d͡jehuty. This option should point to a filesystem directory where these profile images can be stored.</td>
+</tr>
+<tr>
+<td style="text-align: left;">d͡isable-2fa</td>
+<td style="text-align: left;">Accounts with privileges receive a code by e-mail as a second factor when logging in. Setting this option to 1 disables the second factor authentication.</td>
+</tr>
+<tr>
+<td style="text-align: left;">s͡andbox-message</td>
+<td style="text-align: left;">Display a message on the top of every page.</td>
+</tr>
+<tr>
+<td style="text-align: left;">n͡otice-message</td>
+<td style="text-align: left;">Display a message on the main page.</td>
+</tr>
+<tr>
+<td style="text-align: left;">m͡aintenance-mode</td>
+<td style="text-align: left;">When set to 1, all HTTP requests result in the displayment of a maintenance message. Use this option while backing up the database, or when performing major updates.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="configuring-the-database">Configuring the Database</h2>
+<p>The d͡jehuty program stores its state in a SPARQL 1.1 compliant RDF
+store. Configuring the connection details is done in the r͡df-store node.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Option</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">s͡tate-graph</td>
+<td style="text-align: left;">The graph name to store triplets in.</td>
+</tr>
+<tr>
+<td style="text-align: left;">s͡parql-uri</td>
+<td style="text-align: left;">The URI at which the SPARQL 1.1 endpoint can be reached. When the s͡parql-uri begins with b͡db://, followed by a path to a filesystem directory, it will use the BerkeleyDB back-end, for which the Python package needs to be installed.</td>
+</tr>
+<tr>
+<td style="text-align: left;">s͡parql-update-uri</td>
+<td style="text-align: left;">The URI at which the SPARQL 1.1 Update endpoint can be reached (in case it is different from the s͡parql-uri.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="audit-trails-and-database-reconstruction">Audit trails and database reconstruction</h2>
+<p>The d͡jehuty program can keep an audit log of all database modifications
+made by itself from which a database state can be reconstructed. Whether
+d͡jehuty keeps such an audit log can be configured with the following
+option:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Option</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">e͡nable-query-audit-log</td>
+<td style="text-align: left;">When set to 1, it writes every SPARQL query that modifies the database in the web logs. This can be replayed to reconstruct the database at a later time. Setting this option to 0 disables this feature. This element takes an attribute t͡ransactions-directory that should specify an empty directory to which transactions can be written that are extracted from the audit log.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="reconstructing-the-database-from-the-query-audit-log">Reconstructing the database from the query audit log</h3>
+<p>Each query that modifies the database state while the query audit logs
+are enabled can be extracted from the query audit log using the
+-͡-extract-transactions-from-log command-line option. A timestamp to
+specify the starting point to extract from can be specified as an
+argument. The following example displays its use:</p>
+<pre><code class="language-bash">djehuty web --config-file=config.xml --extract-transactions-from-log=&quot;YYYY-MM-DD HH:MM:SS&quot;
+</code></pre>
+<p>This will create a file for each query in the folder specified in the
+t͡ransactions-directory attribute.</p>
+<p>To replay the extracted transactions, use the a͡pply-transactions
+command-line option:</p>
+<pre><code class="language-bash">djehuty web --config-file=config.xml --apply-transactions
+</code></pre>
+<p>When a query cannot be executed, the command stops, allowing to fix or
+remove the query to-be-replayed. Invoking the -͡-apply-transactions
+command a second time will continue replaying where the previous run
+stopped.</p>
+<h2 id="configuring-storage">Configuring storage</h2>
+<p>Storage locations can be configured with the s͡torage node. When
+configuring multiple locations, d͡jehuty attempts to find a file by
+looking at the first configured location, and in case it cannot find the
+file there, it will look at the second configured location, and so on,
+until it has tried each storage location.</p>
+<p>This allows for moving files between storage systems transparently
+without requiring specific interactions with d͡jehuty other than having
+the files made available as a POSIX filesystem.</p>
+<p>One use-case that suits this mechanism is letting uploads write to fast
+online storage and later move the uploaded files to a slower but less
+costly storage.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Option</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">l͡ocation</td>
+<td style="text-align: left;">A filesystem path to where files are stored. This is a repeatable property.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="configuring-an-identity-provider">Configuring an identity provider</h2>
+<p>Ideally, d͡jehuty makes use of an external identity provider. d͡jehuty can
+use SAML2.0, ORCID, or an internal identity provider (for testing and
+development purposes only).</p>
+<p>This section will outline the configuration options for each identity
+provision mechanism.</p>
+<h3 id="saml20">SAML2.0</h3>
+<p>For SAML 2.0, the configuration can be placed in the s͡aml section under
+a͡uthentication. That looks as following:</p>
+<pre><code class="language-xml">&lt;authentication&gt;
+  &lt;saml version=&quot;2.0&quot;&gt;
+    &lt;!-- Configuration goes here. --&gt;
+  &lt;/saml&gt;
+&lt;/authentication&gt;
+</code></pre>
+<p>The options outlined in the remainder of this section should be placed
+where the example shows .</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Option</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">s͡trict</td>
+<td style="text-align: left;">When set to 1, SAML responses must be signed. <strong>Never disable ‘strict’ mode in a production environment.</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">d͡ebug</td>
+<td style="text-align: left;">Increases logging verbosity for SAML-related messages.</td>
+</tr>
+<tr>
+<td style="text-align: left;">a͡ttributes</td>
+<td style="text-align: left;">In this section the attributes provided by the identity provider can be aligned to the attributes d͡jehuty expects.</td>
+</tr>
+<tr>
+<td style="text-align: left;">s͡ervice-provider</td>
+<td style="text-align: left;">The d͡jehuty program fulfills the role of service provider. In this section the certificate and service provider metadata can be configured.</td>
+</tr>
+<tr>
+<td style="text-align: left;">i͡dentity-provider</td>
+<td style="text-align: left;">In this section the certificate and single-sign-on URL of the identity provider can be configured.</td>
+</tr>
+<tr>
+<td style="text-align: left;">s͡ram</td>
+<td style="text-align: left;">In this section, SURF Research Access Management-specific attributes can be configured.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="the-attributes-configuration">The a͡ttributes configuration</h4>
+<p>To create account and author records and to authenticate a user, d͡jehuty
+stores information provided by the identity provider. Each identity
+provider may provide this information using different attributes.
+Therefore, the translation from attributes used by d͡jehuty and
+attributes given by the identity provider can be configured. The
+following attributes must be configured.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Option</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">f͡irst-name</td>
+<td style="text-align: left;">A user’s first name.</td>
+</tr>
+<tr>
+<td style="text-align: left;">l͡ast-name</td>
+<td style="text-align: left;">A user’s last name.</td>
+</tr>
+<tr>
+<td style="text-align: left;">c͡ommon-name</td>
+<td style="text-align: left;">A user’s full name.</td>
+</tr>
+<tr>
+<td style="text-align: left;">e͡mail</td>
+<td style="text-align: left;">A user’s e-mail address.</td>
+</tr>
+<tr>
+<td style="text-align: left;">g͡roups</td>
+<td style="text-align: left;">The attribute denoting groups.</td>
+</tr>
+<tr>
+<td style="text-align: left;">g͡roup-prefix</td>
+<td style="text-align: left;">The prefix for each group short name.</td>
+</tr>
+</tbody>
+</table>
+<p>As an example, the attributes configuration for SURFConext looks like
+this:</p>
+<pre><code class="language-xml">&lt;attributes&gt;
+  &lt;first-name&gt;urn:mace:dir:attribute-def:givenName&lt;/first-name&gt;
+  &lt;last-name&gt;urn:mace:dir:attribute-def:sn&lt;/last-name&gt;
+  &lt;common-name&gt;urn:mace:dir:attribute-def:cn&lt;/common-name&gt;
+  &lt;email&gt;urn:mace:dir:attribute-def:mail&lt;/email&gt;
+&lt;/attributes&gt;
+</code></pre>
+<p>And for SURF Research Access Management (SRAM), the attributes
+configuration looks like this:</p>
+<pre><code class="language-xml">&lt;attributes&gt;
+  &lt;first-name&gt;urn:oid:2.5.4.42&lt;/first-name&gt;
+  &lt;last-name&gt;urn:oid:2.5.4.4&lt;/last-name&gt;
+  &lt;common-name&gt;urn:oid:2.5.4.3&lt;/common-name&gt;
+  &lt;email&gt;urn:oid:0.9.2342.19200300.100.1.3&lt;/email&gt;
+  &lt;groups&gt;urn:oid:1.3.6.1.4.1.5923.1.1.1.7&lt;/groups&gt;
+  &lt;group-prefix&gt;urn:mace:surf.nl:sram:group:[organisation]:[service]&lt;/group-prefix&gt;
+&lt;/attributes&gt;
+</code></pre>
+<h4 id="the-sram-configuration">The s͡ram configuration</h4>
+<p>When using SURF Research Access Management (SRAM), d͡jehuty can persuade
+SRAM to send an invitation to anyone inside or outside the institution
+to join the SRAM collaboration that provides access to the d͡jehuty
+instance. To do so, the following attributes must be configured.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Option</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">o͡rganization-api-token</td>
+<td style="text-align: left;">An organization-level API token.</td>
+</tr>
+<tr>
+<td style="text-align: left;">c͡ollaboration-id</td>
+<td style="text-align: left;">The UUID of the collaboration to invite users to.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="the-service-provider-configuration">The s͡ervice-provider configuration</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Option</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">x͡509-certificate</td>
+<td style="text-align: left;">Contents of the public certificate without whitespacing.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡rivate-key</td>
+<td style="text-align: left;">Contents of the private key belonging to the x͡509-certificate to sign messages with.</td>
+</tr>
+<tr>
+<td style="text-align: left;">m͡etadata</td>
+<td style="text-align: left;">This section contains metadata that may be displayed by the identity provider to users before authorizing them.</td>
+</tr>
+<tr>
+<td style="text-align: left;">d͡isplay-name</td>
+<td style="text-align: left;">The name to be displayed by the identity provider when authorizing the user to the service.</td>
+</tr>
+<tr>
+<td style="text-align: left;">u͡rl</td>
+<td style="text-align: left;">The URL to the service.</td>
+</tr>
+<tr>
+<td style="text-align: left;">d͡escription</td>
+<td style="text-align: left;">Textual description of the service.</td>
+</tr>
+<tr>
+<td style="text-align: left;">o͡rganization</td>
+<td style="text-align: left;">This section contains metadata to describe the organization behind the service.</td>
+</tr>
+<tr>
+<td style="text-align: left;">n͡ame</td>
+<td style="text-align: left;">The name of the service provider’s organization.</td>
+</tr>
+<tr>
+<td style="text-align: left;">u͡rl</td>
+<td style="text-align: left;">The URL to the web page of the organization.</td>
+</tr>
+<tr>
+<td style="text-align: left;">c͡ontact</td>
+<td style="text-align: left;">A repeatable section to list contact persons and their roles within the organization. The role can be configured by setting the t͡ype attribute.</td>
+</tr>
+<tr>
+<td style="text-align: left;">f͡irst-name</td>
+<td style="text-align: left;">The first name of the contact person.</td>
+</tr>
+<tr>
+<td style="text-align: left;">l͡ast-name</td>
+<td style="text-align: left;">The last name of the contact person.</td>
+</tr>
+<tr>
+<td style="text-align: left;">e͡mail</td>
+<td style="text-align: left;">The e-mail address of the contact person. Note that some identity providers prefer functional e-mail addresses (e.g. support@... instead of jdoe@...).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="orcid">ORCID</h3>
+<p><a href="https://orcid.org">ORCID.org</a> plays a key role in making researchers
+findable. Its identity provider service can be used by d͡jehuty in two
+ways:</p>
+<ol>
+<li>
+<p>As primary identity provider to log in and deposit data;</p>
+</li>
+<li>
+<p>As additional identity provider to couple an author record to its
+    ORCID record.</p>
+</li>
+</ol>
+<p>When another identity provider is configured in addition to ORCID, that
+identity provider will be used as primary and ORCID will only be used to
+couple author records to the author’s ORCID record.</p>
+<p>To configure ORCID, the configuration can be placed in the o͡rcid section
+under a͡uthentication. That looks as following:</p>
+<pre><code class="language-xml">&lt;authentication&gt;
+  &lt;orcid&gt;
+    &lt;!-- Configuration goes here. --&gt;
+  &lt;/orcid&gt;
+&lt;/authentication&gt;
+</code></pre>
+<p>Then the following parameters can be configured:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Option</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">c͡lient-id</td>
+<td style="text-align: left;">The client ID provided by ORCID.</td>
+</tr>
+<tr>
+<td style="text-align: left;">c͡lient-secret</td>
+<td style="text-align: left;">The client secret provided by ORCID.</td>
+</tr>
+<tr>
+<td style="text-align: left;">e͡ndpoint</td>
+<td style="text-align: left;">The URL to the ORCID endpoint to use.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="configuring-an-e-mail-server">Configuring an e-mail server</h2>
+<p>On various occassions, d͡jehuty will attempt to send an e-mail to either
+an author, a reviewer or an administrator. To be able to do so, an
+e-mail server must be configured from which the instance may send
+e-mails.</p>
+<p>The configuration is done under the e͡mail node, and the following items
+can be configured:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Option</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">s͡erver</td>
+<td style="text-align: left;">Address of the e-mail server without protocol specification.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡ort</td>
+<td style="text-align: left;">The port the e-mail server operates on.</td>
+</tr>
+<tr>
+<td style="text-align: left;">s͡tarttls</td>
+<td style="text-align: left;">When 1, d͡jehuty attempts to use StartTLS.</td>
+</tr>
+<tr>
+<td style="text-align: left;">u͡sername</td>
+<td style="text-align: left;">The username to authenticate with to the e-mail server.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡assword</td>
+<td style="text-align: left;">The password to authenticate with to the e-mail server.</td>
+</tr>
+<tr>
+<td style="text-align: left;">f͡rom</td>
+<td style="text-align: left;">The e-mail address used to send e-mail from.</td>
+</tr>
+<tr>
+<td style="text-align: left;">s͡ubject-prefix</td>
+<td style="text-align: left;">Text to prefix in the subject of all e-mails sent from the instance of d͡jehuty. This can be used to distinguish a test instance from a production instance.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="configuring-doi-registration">Configuring DOI registration</h2>
+<p>When publishing a dataset or collection, d͡jehuty can register a
+persistent identifier with DataCite. To enable this feature, configure
+it under the d͡atacite node. The following parameters can be configured:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Option</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">a͡pi-url</td>
+<td style="text-align: left;">The URL of the API endpoint of DataCite.</td>
+</tr>
+<tr>
+<td style="text-align: left;">r͡epository-id</td>
+<td style="text-align: left;">The repository identifier given by DataCite.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡assword</td>
+<td style="text-align: left;">The password to authenticate with to DataCite.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡refix</td>
+<td style="text-align: left;">The DOI prefix to use when registering a DOI.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="configuring-handle-registration">Configuring Handle registration</h2>
+<p>Each uploaded file can be assigned a persistent identifier using the
+Handle system. To enable this feature, configure it under the h͡andle
+node. The following parameters can be configured:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Option</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">u͡rl</td>
+<td style="text-align: left;">The URL of the API endpoint of the Handle system implementor.</td>
+</tr>
+<tr>
+<td style="text-align: left;">c͡ertificate</td>
+<td style="text-align: left;">Certificate to use for authenticating to the endpoint.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡rivate-key</td>
+<td style="text-align: left;">The private key paired with the certificate used to authenticate to the endpoint.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡refix</td>
+<td style="text-align: left;">The Handle prefix to use when registering a handle.</td>
+</tr>
+<tr>
+<td style="text-align: left;">i͡ndex</td>
+<td style="text-align: left;">The index to use when registering a handle.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="configuring-iiif-support">Configuring IIIF support</h2>
+<p>When publishing images, d͡jehuty can enable the IIIF Image API for the
+images. It uses l͡ibvips and p͡yvips under the hood to perform image
+manipulation. The following parameters can be configured:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Option</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">e͡nable-iiif</td>
+<td style="text-align: left;">Enable support for the IIIF image API. This requires the p͡yvips package to be available in the run-time environment.</td>
+</tr>
+<tr>
+<td style="text-align: left;">i͡iif-cache-root</td>
+<td style="text-align: left;">The directory to store the output of IIIF Image API requests to avoid re-computing the image.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="customizing-looks">Customizing looks</h2>
+<p>With the following options, the instance can be branded as necessary.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Option</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">s͡ite-name</td>
+<td style="text-align: left;">Name for the instance used in the title of a browser window and as default value in the publisher field for new datasets.</td>
+</tr>
+<tr>
+<td style="text-align: left;">s͡ite-description</td>
+<td style="text-align: left;">Description used as a meta-tag in the HTML output.</td>
+</tr>
+<tr>
+<td style="text-align: left;">s͡ite-shorttag</td>
+<td style="text-align: left;">Used as keyword and as Git remote name.</td>
+</tr>
+<tr>
+<td style="text-align: left;">s͡upport-email-address</td>
+<td style="text-align: left;">E-mail address used in e-mails sent to users in automated messages.</td>
+</tr>
+<tr>
+<td style="text-align: left;">c͡ustom-logo-path</td>
+<td style="text-align: left;">Path to a PNG image file that will be used as logo on the website.</td>
+</tr>
+<tr>
+<td style="text-align: left;">c͡ustom-favicon-path</td>
+<td style="text-align: left;">Path to an ICO file that will be used as favicon.</td>
+</tr>
+<tr>
+<td style="text-align: left;">s͡mall-footer</td>
+<td style="text-align: left;">HTML that will be used as footer for all pages except for the main page.</td>
+</tr>
+<tr>
+<td style="text-align: left;">l͡arge-footer</td>
+<td style="text-align: left;">HTML that will be used as footer on the main page.</td>
+</tr>
+<tr>
+<td style="text-align: left;">s͡how-portal-summary</td>
+<td style="text-align: left;">When set to 1, it shows the repository summary of number of datasets, authors, collections, files and bytes on the main page.</td>
+</tr>
+<tr>
+<td style="text-align: left;">s͡how-institutions</td>
+<td style="text-align: left;">When set to 1, it shows the list of institutions on the main page.</td>
+</tr>
+<tr>
+<td style="text-align: left;">s͡how-science-categories</td>
+<td style="text-align: left;">When set to 1, it shows the subjects (categories) on the main page.</td>
+</tr>
+<tr>
+<td style="text-align: left;">s͡how-latest-datasets</td>
+<td style="text-align: left;">When set to 1, it shows the list of latest published datasets on the main page.</td>
+</tr>
+<tr>
+<td style="text-align: left;">c͡olors</td>
+<td style="text-align: left;">Colors used in the HTML output. See section &lt;a href="#sec:customize-colors" data-reference-type="ref"</td>
+</tr>
+<tr>
+<td style="text-align: left;">data-reference="sec:customize-colors"&gt;1.10.1</a>.</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="customizing-colors">Customizing colors</h3>
+<p>The following options can be configured in the c͡olors section.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Option</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡rimary-color</td>
+<td style="text-align: left;">The main background color to use.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡rimary-foreground-color</td>
+<td style="text-align: left;">The main foreground color to use.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡rimary-color-hover</td>
+<td style="text-align: left;">Color to use when hovering a link.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡rimary-color-active</td>
+<td style="text-align: left;">Color to use when a link is clicked.</td>
+</tr>
+<tr>
+<td style="text-align: left;">p͡rivilege-button-color</td>
+<td style="text-align: left;">The background color of buttons for privileged actions.</td>
+</tr>
+<tr>
+<td style="text-align: left;">f͡ooter-background-color</td>
+<td style="text-align: left;">Color to use in the footer.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="configuring-privileged-users">Configuring privileged users</h2>
+<p>By default an authenticated user may deposit data. But users can have
+additional roles; for example: a dataset reviewer, a technical
+administrator or a quota reviewer.</p>
+<p>Such additional roles are configured in terms of privileges. The
+following privileges can be configured in the p͡rivileges section:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Option</strong></td>
+<td style="text-align: left;"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">m͡ay-administer</td>
+<td style="text-align: left;">Allows access to perform maintenance tasks, view accounts and view reports on restricted and embargoed datasets.</td>
+</tr>
+<tr>
+<td style="text-align: left;">m͡ay-run-sparql-queries</td>
+<td style="text-align: left;">Allows to run arbitrary SPARQL queries on the database.</td>
+</tr>
+<tr>
+<td style="text-align: left;">m͡ay-impersonate</td>
+<td style="text-align: left;">Allows to log in to any account and therefore perform any action as that account.</td>
+</tr>
+<tr>
+<td style="text-align: left;">m͡ay-review</td>
+<td style="text-align: left;">Allows to see which datasets are sent for review, and allows to perform reviews.</td>
+</tr>
+<tr>
+<td style="text-align: left;">m͡ay-review-quotas</td>
+<td style="text-align: left;">Allows access to see requests for storage quota increases and approve or decline them.</td>
+</tr>
+<tr>
+<td style="text-align: left;">m͡ay-review-integrity</td>
+<td style="text-align: left;">Allows access to an API call that provides statistics on the accessibility of files on the filesystem.</td>
+</tr>
+<tr>
+<td style="text-align: left;">m͡ay-process-feedback</td>
+<td style="text-align: left;">Accounts with this privilege will receive e-mails with the information entered into the feedback form by other users.</td>
+</tr>
+<tr>
+<td style="text-align: left;">m͡ay-receive-email-notifications</td>
+<td style="text-align: left;">This “privilege” can be used to disable sending any e-mails to an account by setting it to 0͡. The default is 1͡.</td>
+</tr>
+</tbody>
+</table>
+<p>To enable a privilege for an account, set the value of the desired
+privilege to 1͡. Privileges are disabled by default, except for
+m͡ay-receive-email-notifications which defaults to 1͡.</p>
+<pre><code class="language-xml">&lt;privileges&gt;
+    &lt;account email=&quot;you@example.com&quot; orcid=&quot;0000-0000-0000-0001&quot;&gt;
+      &lt;may-administer&gt;1&lt;/may-administer&gt;
+      &lt;may-run-sparql-queries&gt;1&lt;/may-run-sparql-queries&gt;
+      &lt;may-impersonate&gt;1&lt;/may-impersonate&gt;
+      &lt;may-review&gt;0&lt;/may-review&gt;
+      &lt;may-review-quotas&gt;0&lt;/may-review-quotas&gt;
+      &lt;may-review-integrity&gt;0&lt;/may-review-integrity&gt;
+      &lt;may-process-feedback&gt;0&lt;/may-process-feedback&gt;
+      &lt;may-receive-email-notifications&gt;1&lt;/may-receive-email-notifications&gt;
+    &lt;/account&gt;
+  &lt;/privileges&gt;
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>
