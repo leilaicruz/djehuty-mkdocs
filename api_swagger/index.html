@@ -7,11 +7,11 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="Documentation for the Djehuty project" name="description"/>
 <meta content="Roel Janssen" name="author"/>
-<link href="../running-djehuty/" rel="prev"/>
-<link href="../api_swagger/" rel="next"/>
+<link href="../knowledge-graph/" rel="prev"/>
+<link href="../contributing/" rel="next"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.5.44" name="generator"/>
-<title>Data model - Djehuty Documentation</title>
+<title>API Documentation - Djehuty Documentation</title>
 <link href="../assets/stylesheets/main.0253249f.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -24,9 +24,6 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#knowledge-graph">
-          Skip to content
-        </a>
 </div>
 <div data-md-component="announce">
 </div>
@@ -48,7 +45,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Data model
+              API Documentation
             
           </span>
 </div>
@@ -92,83 +89,16 @@
   </span>
 </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../knowledge-graph/">
+<span class="md-ellipsis">
+    Data model
+  </span>
+</a>
+</li>
 <li class="md-nav__item md-nav__item--active">
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
-<span class="md-ellipsis">
-    Data model
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
 <a class="md-nav__link md-nav__link--active" href="./">
-<span class="md-ellipsis">
-    Data model
-  </span>
-</a>
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#31-use-of-vocabularies">
-<span class="md-ellipsis">
-      3.1 Use of vocabularies
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#32-notational-shortcuts">
-<span class="md-ellipsis">
-      3.2 Notational shortcuts
-    </span>
-</a>
-<nav aria-label="3.2 Notational shortcuts" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#321-notation-for-typed-triples">
-<span class="md-ellipsis">
-      3.2.1 Notation for typed triples
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#322-notation-for-rdflist">
-<span class="md-ellipsis">
-      3.2.2 Notation for rdf:List
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#33-datasets">
-<span class="md-ellipsis">
-      3.3 Datasets
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#34-accounts">
-<span class="md-ellipsis">
-      3.4 Accounts
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#35-funding">
-<span class="md-ellipsis">
-      3.5 Funding
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../api_swagger/">
 <span class="md-ellipsis">
     API Documentation
   </span>
@@ -190,154 +120,14 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#31-use-of-vocabularies">
-<span class="md-ellipsis">
-      3.1 Use of vocabularies
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#32-notational-shortcuts">
-<span class="md-ellipsis">
-      3.2 Notational shortcuts
-    </span>
-</a>
-<nav aria-label="3.2 Notational shortcuts" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#321-notation-for-typed-triples">
-<span class="md-ellipsis">
-      3.2.1 Notation for typed triples
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#322-notation-for-rdflist">
-<span class="md-ellipsis">
-      3.2.2 Notation for rdf:List
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#33-datasets">
-<span class="md-ellipsis">
-      3.3 Datasets
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#34-accounts">
-<span class="md-ellipsis">
-      3.4 Accounts
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#35-funding">
-<span class="md-ellipsis">
-      3.5 Funding
-    </span>
-</a>
-</li>
-</ul>
 </nav>
 </div>
 </div>
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="knowledge-graph">Knowledge graph</h1>
-<p>djehuty processes its information using the Resource Description Framework (<a href="#Xlassila-99-rdf">Lassila</a>, <a href="#Xlassila-99-rdf">1999</a>). This chapter
-describes the parts that make up the data model of djehuty.</p>
-<h3 id="31-use-of-vocabularies">3.1  Use of vocabularies</h3>
-<p>Throughout this chapter, abbreviated references to ontologies are used. Table <a href="#x1-29001r1">3.1</a> lists these
-abbreviations.</p>
-<hr/>
-<p>| Abbreviation | Ontology URI |
-| djht | <a href="https://ontologies.data.4tu.nl/djehuty/24.10.1/">https://ontologies.data.4tu.nl/djehuty/24.10.1/</a> |
-| rdf | <a href="http://www.w3.org/1999/02/22-rdf-syntax-ns">http://www.w3.org/1999/02/22-rdf-syntax-ns#</a> |
-| rdfs | <a href="http://www.w3.org/2000/01/rdf-schema">http://www.w3.org/2000/01/rdf-schema#</a> |
-| xsd | <a href="http://www.w3.org/2001/XMLSchema">http://www.w3.org/2001/XMLSchema#</a> |
-|  |</p>
-<p>Table 3.1: Lookup table for vocabulary URIs and their abbreviations.   </p>
-<hr/>
-<h3 id="32-notational-shortcuts">3.2  Notational shortcuts</h3>
-<p>In addition to abbreviating ontologies with their prefix we use another notational shortcut. To effectively
-communicate the structure of the RDF graph used by djehuty we introduce a couple of shorthand
-notations.</p>
-<h4 id="321-notation-for-typed-triples">3.2.1  Notation for typed triples</h4>
-<p>When the object in a triple is typed, we introduce the shorthand to only show the type, rather than the
-actual value of the object. Figure <a href="#x1-31001r1">3.1</a> displays this for URIs, and figure <a href="#x1-31002r2">3.2</a> displays this for
-literals.</p>
-<hr/>
-<p><img alt="PIC" src="figures/typed-notation-.png"/></p>
-<p>Figure 3.1: Shorthand notation for triples with an rdf:type which features a hollow
-predicate arrow and a colored type specifier with rounded corners.   </p>
-<hr/>
-<p>Literals are depicted by rectangles (with sharp edges) in contrast to URIs which are depicted as rectangles
-with rounded edges.</p>
-<hr/>
-<p><img alt="PIC" src="figures/typed-literals-notation-.png"/></p>
-<p>Figure 3.2: Shorthand notation for triples with a literal, which features a hollow predicate
-arrow and a colored rectangular type specifier.   </p>
-<hr/>
-<p>When the subject of a triple is the shorthand type, assume the subject is not the type itself but the subject
-which has that type.</p>
-<h4 id="322-notation-for-rdflist">3.2.2  Notation for rdf:List</h4>
-<p>To preserve the order in which lists were formed, the data model makes use of rdf:List with numeric
-indexes. This pattern will be abbreviated in the remainder of the figures as displayed in figure
-<a href="#x1-32001r3">3.3</a>.</p>
-<hr/>
-<p><img alt="PIC" src="figures/rdf-list-abbrev-.png"/></p>
-<p>Figure 3.3: Shorthand notation for rdf:List with numeric indexes, which features a
-hollow double-arrow. Lists have arbitrary lengths, and the numeric indexes use 1-based
-indexing.   </p>
-<hr/>
-<p>The hollow double-arrow depicts the use of an rdf:List with numeric indexes.</p>
-<h3 id="33-datasets">3.3  Datasets</h3>
-<p>Datasets play a central role in the repository system because every other type links in one way or another
-to it. The user submits files along with data about those bytes as a single record which we
-call a djht:Dataset. Figure <a href="#x1-33001r4">3.4</a> shows how the remainder of types in this chapter relate to a
-djht:Dataset.</p>
-<hr/>
-<p><img alt="PIC" src="figures/dataset-.png"/></p>
-<p>Figure 3.4: The RDF pattern for a djht:Dataset. For a full overview of djht:Dataset
-properties, use the exploratory from the administration panel.   </p>
-<hr/>
-<p>Datasets are versioned records. The data and metadata between versions can differ, except all versions of a
-dataset share an identifier. We use djht:DatasetContainer to describe the version-unspecific properties of
-a set of versioned datasets.</p>
-<hr/>
-<p><img alt="PIC" src="figures/dataset-container-.png"/></p>
-<p>Figure 3.5: The RDF pattern for a djht:DatasetContainer. All versions of a dataset
-share a djht:dataset_id and a UUID in the container URI.   </p>
-<hr/>
-<p>The data model follows a natural expression of published versions as a linked list. Figure <a href="#x1-33002r5">3.5</a> further
-reveals that the view, download, share and citation counts are stored in a version-unspecific
-way.</p>
-<h3 id="34-accounts">3.4  Accounts</h3>
-<p>djehuty uses an external identity provider, but stores an e-mail address, full name, and preferences for
-categories.</p>
-<hr/>
-<p><img alt="PIC" src="figures/account-.png"/></p>
-<p>Figure 3.6: The RDF pattern for an djht:Account.   </p>
-<hr/>
-<h3 id="35-funding">3.5  Funding</h3>
-<p>When the djht:Dataset originated out of a funded project, the funders can be listed using djht:Funding.
-Figure <a href="#x1-35001r7">3.7</a> displays the details for this structure.</p>
-<hr/>
-<p><img alt="PIC" src="figures/funding-.png"/></p>
-<p>Figure 3.7: The RDF pattern for a djht:Funding.   </p>
-<hr/>
+<h1>API Documentation</h1>
+<p><iframe class="swagger-ui-iframe" frameborder="0" id="b70d2fc8" src="swagger-b70d2fc8.html" style="overflow:hidden;width:100%;" width="100%"></iframe></p>
 </article>
 </div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
@@ -379,7 +169,7 @@ Figure <a href="#x1-35001r7">3.7</a> displays the details for this structure.</p
                 iframe_id_list.push(iframes[i].getAttribute("id"))
             }
         
-            let ticking = true;
+            let ticking = false;
             
             document.addEventListener('scroll', function(e) {
                 if (!ticking) {
