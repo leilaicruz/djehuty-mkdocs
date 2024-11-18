@@ -6,12 +6,23 @@ site_author: "Roel Janssen"
 theme:
   name: material  # Use the mkdocs-material theme, if installed
 
+
+
 nav:
   - Home: index.md
   - Introduction: introduction.md
   - Configuration: running-djehuty.md
   - Data model: knowledge-graph.md
-  - API Documentation: api.md
+  - API Documentation: api_swagger.md
   - Contributing: contributing.md
+
+
+
+plugins:
+ - swagger-ui-tag
+
+
+extra_css:
+- https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.43.0/swagger-ui.css
 
 # Optional: Define additional settings, plugins, and customization

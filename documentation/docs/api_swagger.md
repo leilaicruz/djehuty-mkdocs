@@ -1,0 +1,1 @@
+<swagger-ui src="openapi_spec_model.yml"/>
