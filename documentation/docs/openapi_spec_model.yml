@@ -33,11 +33,51 @@ paths:
           schema:
             type: string
           description: "When set, datasets published before this timestamp are dropped from the results.The format is `YYYY-MM-DD`"
+        - in: query
+          name: modified_since
+          schema:
+            type: string
+          description: "When set, only datasets modified after this timestamp are shown from the results.The format is `YYYY-MM-DD`"
+        - in : query
+          name: group
+          schema:
+            type: string
+          description: "The group identifier to filter on."
+        - in: query
+          name: resource_doi
+          schema:
+            type: string
+          description: "The DOI of the associated journal publication. When set, only returns datasets associated with this DOI."
+        - in : query
+          name: item_type
+          schema:
+            type: int
+          description: "Either `3` for datasets or `9` for software."
+        - in: query
+          name: doi
+          schema:
+            type: string
+          description: "The DOI of the dataset to search for."
+        - in : query
+          name: page
+          schema:
+            type: integer
+          description: "The page number used in combination with `page_size`."
+        - in : query
+          name: page_size
+          schema:
+            type: integer
+          description: "The number of datasets per page. Used in combination with `page`."
         - in : query
           name: limit
           schema:
             type: integer
           description: "Maximum number of results to return"
+        - in : query
+          name: offset
+          schema:
+            type: integer
+          description: "The number of datasets to skip in the output. Used in combination with `limit`."
         # Add additional parameters as needed
       responses:
         "200":
@@ -63,5 +103,66 @@ paths:
                       format: date-time
                       description: "Publication date"
                     # Add other fields as needed
-
+  /v2/articles/search/:
+    post:
+      summary: ''
+      description: 'The terms to search for'
+      operationId: search_for
+      responses:
+        '200':
+          description: A list of articles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    uuid:
+                      type: string
+                      description: Unique identifier of the article
+                    title:
+                      type: string
+                      description: Title of the article
+                    doi:
+                      type: string
+                      description: DOI of the article
+                    published_date:
+                      type: string
+                      format: date-time
+                      description: Publication date
+  /v2/articles/{uuid}:
+    get:
+      summary: ''
+      description: ''
+      operationId: get_article
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema:
+            type: string
+          description: 'Unique identifier of the article'
+      responses:
+        '200':
+          description: A list of articles
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+                    description: Unique identifier of the article
+                  title:
+                    type: string
+                    description: Title of the article
+                  doi:
+                    type: string
+                    description: DOI of the article
+                  published_date:
+                    type: string
+                    format: date-time
+                    description: Publication date
+  
 
