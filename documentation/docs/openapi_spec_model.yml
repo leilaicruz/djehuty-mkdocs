@@ -3,9 +3,13 @@ info:
   title: Djehuty API
   version: 1.0.0
   description: API documentation for Djehuty's public interface
+# servers:
+#   - url: https://data.4tu.nl
+#     description: Primary Djehuty API server
 servers:
-  - url: https://data.4tu.nl
-    description: Primary Djehuty API server
+  - url: https://cors-anywhere.herokuapp.com/https://data.4tu.nl
+    description: Proxy server to bypass CORS
+
 paths:
   /v2/articles:
     get:
@@ -406,7 +410,9 @@ paths:
   /v2/articles/search:
     post:
       summary: "Search for articles"
-      description: "Searches for articles based on the provided search term."
+      description: >
+        Searches for articles based on the provided search term.
+        The `search_for` field is required in the request body.
       operationId: "searchArticles"
       tags:
         - "Public Articles"
@@ -421,9 +427,9 @@ paths:
                 search_for:
                   type: string
                   description: "The term to search for in articles"
-                  example: "djehuty"
+                  example: "wingtips"
       responses:
-        "200":
+        '200':
           description: "A successful response containing search results"
           content:
             application/json:
@@ -441,7 +447,11 @@ paths:
                     doi:
                       type: string
                       description: "DOI of the article"
-        "400":
+                    published_date:
+                      type: string
+                      format: date-time
+                      description: "Publication date of the article"
+        '400':
           description: "Invalid request due to malformed input"
           content:
             application/json:
@@ -451,41 +461,8 @@ paths:
                   error:
                     type: string
                     description: "Error message describing why the request failed"
-                    example: "Invalid search term"
-        "401":
-          description: "Unauthorized access due to missing or invalid credentials"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: "Error message"
-                    example: "Unauthorized"
-        "403":
-          description: "Forbidden access due to insufficient permissions"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: "Error message"
-                    example: "Forbidden"
-        "404":
-          description: "No articles found matching the search term"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: "Error message"
-                    example: "No articles found"
-        "500":
+                    example: "Invalid input format"
+        '500':
           description: "Internal server error"
           content:
             application/json:
@@ -494,7 +471,238 @@ paths:
                 properties:
                   error:
                     type: string
-                    description: "Error message"
+                    description: "Error message describing the server error"
                     example: "An unexpected error occurred"
 
-          
+
+  
+  /v2/account/articles:
+    get:
+      summary: Retrieve private articles
+      description: >
+        Fetches a list of private articles associated with the authenticated account.
+        Requires a valid authorization token in the `Authorization` header.
+      tags:
+        - Private Articles
+      security:
+        - BearerAuth: []  # Requires a Bearer token for authentication
+      parameters:
+        - in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+          description: >
+            The maximum number of articles to return in the response.
+        - in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+          description: >
+            The number of articles to skip in the output. Used in combination with `limit`.
+      responses:
+        '200':
+          description: A list of private articles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: Unique identifier of the article
+                      example: "12345"
+                    title:
+                      type: string
+                      description: Title of the article
+                      example: "Example Article Title"
+                    doi:
+                      type: string
+                      description: DOI of the article
+                      example: "10.4124/example-doi"
+                    published_date:
+                      type: string
+                      format: date-time
+                      description: Publication date of the article
+                      example: "2023-01-01T12:00:00Z"
+                    modified_date:
+                      type: string
+                      format: date-time
+                      description: Last modification date of the article
+                      example: "2023-01-15T15:00:00Z"
+        '400':
+          description: Invalid request due to malformed parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message describing why the request failed
+                    example: "Invalid query parameter"
+        '401':
+          description: Unauthorized access due to missing or invalid credentials
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+                    example: "Unauthorized"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+                    example: "An unexpected error occurred"
+
+    post:
+      summary: Create a private article
+      description: >
+        Creates a new private article for the authenticated account.
+        Requires a valid authorization token in the `Authorization` header.
+      tags:
+        - Private Articles
+      security:
+        - BearerAuth: []  # Requires a Bearer token for authentication
+      requestBody:
+        description: Details of the article to create
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: The title of the article
+                  example: "My Private Dataset"
+                description:
+                  type: string
+                  description: A detailed description of the article
+                  example: "This dataset contains information about..."
+                tags:
+                  type: array
+                  items:
+                    type: string
+                  description: Tags associated with the article
+                  example: ["tag1", "tag2"]
+                categories:
+                  type: array
+                  items:
+                    type: string
+                  description: Categories associated with the article
+                  example: ["biology", "genomics"]
+                license:
+                  type: integer
+                  description: License ID for the article
+                  example: 123
+                doi:
+                  type: string
+                  description: DOI for the article (if applicable)
+                  example: "10.4124/example-doi"
+                language:
+                  type: string
+                  description: The language of the article
+                  example: "en"
+                timeline:
+                  type: object
+                  description: Timeline events for the article
+                  properties:
+                    publisherPublication:
+                      type: string
+                      format: date
+                      description: Date of publication by the publisher
+                      example: "2023-01-01"
+                    submission:
+                      type: string
+                      format: date
+                      description: Date of submission
+                      example: "2023-01-02"
+                    posted:
+                      type: string
+                      format: date
+                      description: Date of posting
+                      example: "2023-01-03"
+                    revision:
+                      type: string
+                      format: date
+                      description: Date of revision
+                      example: "2023-01-04"
+      responses:
+        '201':
+          description: Article successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  location:
+                    type: string
+                    description: URL of the created article
+                    example: "https://data.4tu.nl/v2/account/articles/12345"
+                  warnings:
+                    type: array
+                    items:
+                      type: string
+                    description: Warnings generated during the creation process
+                    example: []
+        '400':
+          description: Invalid request due to malformed input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+                    example: "Title is required"
+        '401':
+          description: Unauthorized access due to missing or invalid credentials
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+                    example: "Unauthorized"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+                    example: "An unexpected error occurred"
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: >
+        Use a Bearer token for authentication. Provide the token in the
+        Authorization header as "Bearer YOUR_TOKEN_HERE".
+
+
+
