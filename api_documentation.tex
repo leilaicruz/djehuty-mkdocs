@@ -1,0 +1,76 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{enumitem}
+\geometry{a4paper, margin=1in}
+\title{API Documentation}
+\author{Generated from OpenAPI Specification}
+\date{\today}
+\begin{document}
+\maketitle
+\section*{Introduction}
+This document provides an overview of the API endpoints for the service.
+It was generated from an OpenAPI specification.
+\newpage
+\section*{API Information}\n\textbf{Title}: Djehuty API\\
+\textbf{Version}: 1.0.0\\
+\textbf{Description}: API documentation for Djehuty's public and private interfaces.\\
+
+\section*{Endpoints}\n\subsection*{Endpoint: /v2/articles}
+\subsubsection*{Method: GET}
+\textbf{Summary}: Retrieve a list of articles\\
+\textbf{Description}: Fetches a list of publicly available articles with optional filters for sorting, pagination, and specific fields like DOIs or modification dates.
+\\
+
+\textbf{Parameters:}\n\begin{longtable}{|p{3cm}|p{3cm}|p{6cm}|}\hline\nName & Location & Description \\\hline\norder & query & Field to use for sorting. Options are: - `published_date`: Sort by publication date (default). - `title`: Sort by article title. - `doi`: Sort by DOI. - `modified_date`: Sort by last modification date.
+ \\
+order_direction & query & No description provided \\
+institution & query & Institution identifier to filter results. \\
+published_since & query & Show only articles published since this date. Format: `YYYY-MM-DD`.
+ \\
+modified_since & query & Show only articles modified since this date. Format: `YYYY-MM-DD`.
+ \\
+group & query & Filter results by group identifier. \\
+resource_doi & query & Filter results by DOI of associated journal publication. \\
+item_type & query & Type of items to return `3` for datasets, `9` for software. \\
+doi & query & Filter results by dataset DOI. \\
+page & query & Page number for pagination. \\
+page_size & query & Number of results per page. \\
+\end{longtable}\n\n\textbf{Responses:}\n\begin{longtable}{|p{3cm}|p{8cm}|}\hline\nStatus Code & Description \\\hline\n200 & A list of articles \\
+400 & Invalid request parameters. \\
+401 & Unauthorized. Missing or invalid credentials. \\
+500 & Internal server error. \\
+\end{longtable}\n\n\subsection*{Endpoint: /v2/articles/{dataset-id}}
+\subsubsection*{Method: GET}
+\textbf{Summary}: Retrieve dataset details\\
+\textbf{Description}: Retrieves detailed information about a specific dataset by its ID.
+\\
+
+\textbf{Parameters:}\n\begin{longtable}{|p{3cm}|p{3cm}|p{6cm}|}\hline\nName & Location & Description \\\hline\ndataset-id & path & Unique identifier of the dataset. \\
+\end{longtable}\n\n\textbf{Responses:}\n\begin{longtable}{|p{3cm}|p{8cm}|}\hline\nStatus Code & Description \\\hline\n200 & Dataset details \\
+400 & Invalid dataset ID. \\
+401 & Unauthorized. Missing or invalid credentials. \\
+404 & Dataset not found. \\
+\end{longtable}\n\n\subsection*{Endpoint: /v2/account/articles}
+\subsubsection*{Method: GET}
+\textbf{Summary}: Retrieve private articles\\
+\textbf{Description}: Fetches a list of private articles associated with the authenticated account. Requires a valid `Bearer` token.
+\\
+
+\textbf{Parameters:}\n\begin{longtable}{|p{3cm}|p{3cm}|p{6cm}|}\hline\nName & Location & Description \\\hline\nlimit & query & Maximum number of articles to return. \\
+offset & query & Number of articles to skip. \\
+\end{longtable}\n\n\textbf{Responses:}\n\begin{longtable}{|p{3cm}|p{8cm}|}\hline\nStatus Code & Description \\\hline\n200 & List of private articles \\
+401 & Unauthorized. Missing or invalid credentials. \\
+500 & Internal server error. \\
+\end{longtable}\n\n\subsubsection*{Method: POST}
+\textbf{Summary}: Create a private article\\
+\textbf{Description}: Creates a new private article for the authenticated account. Requires a valid `Bearer` token.
+\\
+
+\textbf{Responses:}\n\begin{longtable}{|p{3cm}|p{8cm}|}\hline\nStatus Code & Description \\\hline\n201 & Article created successfully. \\
+400 & Invalid input data. \\
+401 & Unauthorized. Missing or invalid credentials. \\
+500 & Internal server error. \\
+\end{longtable}\n\n\end{document}
