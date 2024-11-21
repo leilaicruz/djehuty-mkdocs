@@ -1,6 +1,8 @@
 requests
 beautifulsoup4==4.11.1
 markdownify==0.9.3
-mkdocs = "*"
-mkdocs-render-swagger-plugin = "*"
-mkdocs-swagger-ui = "*"
+mkdocs 
+mkdocs-render-swagger-plugin
+mkdocs-swagger-ui
+mkdocs-material
+mkdocs-swagger-ui-tag
