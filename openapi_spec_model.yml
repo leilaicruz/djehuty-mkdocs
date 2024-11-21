@@ -9,6 +9,79 @@ servers:
     description: Proxy server to bypass CORS
 
 paths:
+  /portal:
+    get:
+      summary: "Retrieve the portal home page"
+      description: >
+        This endpoint serves the home page of the Djehuty portal, providing repository
+        statistics, the latest datasets, and customizable display options.
+        The response is rendered as an HTML page.
+      tags:
+        - Portal
+      parameters:
+        - in: query
+          name: show_portal_summary
+          required: false
+          schema:
+            type: boolean
+          description: >
+            Flag to indicate whether the portal summary section should be displayed.
+            Defaults to `true`.
+        - in: query
+          name: show_institutions
+          required: false
+          schema:
+            type: boolean
+          description: >
+            Flag to indicate whether institutions information should be displayed.
+            Defaults to `true`.
+        - in: query
+          name: show_science_categories
+          required: false
+          schema:
+            type: boolean
+          description: >
+            Flag to indicate whether scientific categories should be displayed.
+            Defaults to `true`.
+        - in: query
+          name: show_latest_datasets
+          required: false
+          schema:
+            type: boolean
+          description: >
+            Flag to indicate whether the latest datasets should be displayed.
+            Defaults to `true`.
+      responses:
+        '200':
+          description: "Portal home page rendered successfully"
+          content:
+            text/html:
+              schema:
+                type: string
+                example: "<html><body>...</body></html>"
+        '406':
+          description: "The client does not accept HTML responses."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Not Acceptable: The requested resource is only capable of generating HTML responses."
+        '500':
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "An unexpected error occurred."
+
+
+  
   /v2/articles:
     get:
       summary: Retrieve a list of articles
@@ -30,7 +103,11 @@ paths:
               - modified_date
             default: published_date
           description: >
-            Field to use for sorting. 
+            Field to use for sorting. Options are:
+            - `published_date`: Sort by publication date (default).
+            - `title`: Sort by article title.
+            - `doi`: Sort by DOI.
+            - `modified_date`: Sort by last modification date.
         - in: query
           name: order_direction
           schema:
@@ -242,6 +319,42 @@ paths:
           description: Internal server error.
 
 components:
+  schemas:
+    PortalSummaryData:
+      type: object
+      properties:
+        datasets:
+          type: integer
+          description: Total number of datasets in the repository.
+        authors:
+          type: integer
+          description: Total number of authors.
+        collections:
+          type: integer
+          description: Total number of collections.
+        files:
+          type: integer
+          description: Total number of files.
+        bytes:
+          type: string
+          description: Total size of all files in the repository (formatted string).
+
+    LatestDataset:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The URL to access the dataset.
+          example: "/datasets/1234-5678-90ab-cdef"
+        title:
+          type: string
+          description: The title of the dataset.
+          example: "Example Dataset Title"
+        published_date:
+          type: string
+          format: date
+          description: The publication date of the dataset.
+          example: "2023-01-01"
   securitySchemes:
     BearerAuth:
       type: apiKey
