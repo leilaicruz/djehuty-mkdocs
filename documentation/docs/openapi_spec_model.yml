@@ -318,6 +318,107 @@ paths:
         '500':
           description: Internal server error.
 
+  /v2/account/articles/search:
+    post:
+      summary: Search for private articles
+      description: >
+        Retrieve a list of private articles filtered by the search parameters for the authenticated account. Requires a valid `Bearer` token.
+      tags:
+        - Private Articles
+      security:
+        - BearerAuth: []
+      requestBody:
+        description: Search term to filter list of private articles.
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                search:
+                  type: string
+                  description: The terms to search for
+      responses:
+        '200':
+          description: List of datasets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Legacy identifier for the dataset.
+                  uuid:
+                    type: string
+                    description: Unique identifier for the dataset.  
+                  title:
+                    type: string
+                    description: Title of the dataset.
+                  doi:
+                    type: string
+                    description: DOI of the dataset.
+                  handle:
+                    type: string
+                    description: ????.
+                  url:
+                    type: string
+                    description: URL of the dataset.  
+                  published_date:
+                    type: string
+                    format: date-time
+                    description: Publication date
+                  thumb:
+                    type: object
+                    description: Thumbnail of the dataset.
+                  defined_type:
+                    type: integer
+                    description: 3 for dataset and 9 for software.
+                  defined_type_name:
+                    type: string
+                    description: Dataset or software. 
+                  group_id:
+                    type: integer
+                    description: Insititution ID.  
+                  url_private_api:
+                    type: string
+                    description: Private v2 API endpoint.  
+                  url_public_api:
+                    type: string
+                    description: Public v2 API endpoint. 
+                  url_private_html:
+                    type: string
+                    description: Private html URL. 
+                  url_public_html:
+                    type: string
+                    description: Public html URL.
+                  timeline:
+                    type: object
+                    properties:
+                      posted:
+                        type: string
+                        format: date-time
+                        nullable: true
+                        description: The time the item was posted
+                      firstOnline:
+                        type: string
+                        format: date-time
+                        nullable: true
+                        description: The first time the item was online
+                      revision:
+                        type: string
+                        nullable: true
+                        description: The revision of the item  
+        '400':
+          description: Failed to decode JSON object.
+        '403':
+          description: Invalid or unknown session token.
+        '404':
+          description: Dataset not found.
+        '415':
+          description: Unsupported Media Type.  
+
+
 components:
   schemas:
     PortalSummaryData:
