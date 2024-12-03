@@ -7,81 +7,88 @@ info:
 servers:
   - url: https://cors-anywhere.herokuapp.com/https://data.4tu.nl
     description: Proxy server to bypass CORS
+  # - url: https://data.4tu.nl/
 
 paths:
-  /portal:
-    get:
-      summary: "Retrieve the portal home page"
-      description: >
-        This endpoint serves the home page of the Djehuty portal, providing repository
-        statistics, the latest datasets, and customizable display options.
-        The response is rendered as an HTML page.
+  /v2/account/applications/authorize:
+    post:
+      summary: Authorize Application
+      description: Authorizes an application to access user accounts via the API. Validates client credentials and user permissions.
       tags:
-        - Portal
-      parameters:
-        - in: query
-          name: show_portal_summary
-          required: false
-          schema:
-            type: boolean
-          description: >
-            Flag to indicate whether the portal summary section should be displayed.
-            Defaults to `true`.
-        - in: query
-          name: show_institutions
-          required: false
-          schema:
-            type: boolean
-          description: >
-            Flag to indicate whether institutions information should be displayed.
-            Defaults to `true`.
-        - in: query
-          name: show_science_categories
-          required: false
-          schema:
-            type: boolean
-          description: >
-            Flag to indicate whether scientific categories should be displayed.
-            Defaults to `true`.
-        - in: query
-          name: show_latest_datasets
-          required: false
-          schema:
-            type: boolean
-          description: >
-            Flag to indicate whether the latest datasets should be displayed.
-            Defaults to `true`.
+        - Authenticate and authorize
+      requestBody:
+        description: Client and user credentials for authorization.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                client_id:
+                  type: string
+                  description: The client ID of the application.
+                client_secret:
+                  type: string
+                  description: The client secret of the application.
+                user_credentials:
+                  type: object
+                  description: The user credentials for authorization.
       responses:
         '200':
-          description: "Portal home page rendered successfully"
-          content:
-            text/html:
-              schema:
-                type: string
-                example: "<html><body>...</body></html>"
-        '406':
-          description: "The client does not accept HTML responses."
+          description: Successfully authorized the application.
+        '400':
+          description: Malformed request.
+        '401':
+          description: Authentication failed.
+        '403':
+          description: User lacks necessary permissions.
+
+  /v2/token:
+    post:
+      summary: Generate or Refresh Token
+      description: Generates or refreshes an API token for authenticated users or applications.
+      tags:
+        - Authenticate and authorize
+      requestBody:
+        description: Credentials or refresh token for token generation.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  enum: [authorization_code, refresh_token]
+                  description: The type of grant requested.
+                code:
+                  type: string
+                  description: The authorization code for the token.
+                refresh_token:
+                  type: string
+                  description: The refresh token for generating a new token.
+      responses:
+        '200':
+          description: Successfully generated or refreshed the token.
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  error:
+                  access_token:
                     type: string
-                    example: "Not Acceptable: The requested resource is only capable of generating HTML responses."
-        '500':
-          description: "Internal server error"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "An unexpected error occurred."
+                    description: The generated access token.
+                  expires_in:
+                    type: integer
+                    description: The time in seconds until the token expires.
+        '400':
+          description: Malformed request.
+        '401':
+          description: Authentication failed.
+        '403':
+          description: Client lacks necessary permissions.
 
-
-  
+ 
   /v2/articles:
     get:
       summary: Retrieve a list of articles
@@ -416,7 +423,138 @@ paths:
         '404':
           description: Dataset not found.
         '415':
-          description: Unsupported Media Type.  
+          description: Unsupported Media Type.
+          
+  /v2/account/institution:
+    get:
+      summary: Retrieve User's Institution
+      description: Retrieves information about the user's associated institution within the private account context.
+      tags:
+        - Private Institutions
+      responses:
+        '200':
+          description: Successfully retrieved the institution details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  institution_id:
+                    type: string
+                    description: The unique identifier of the institution.
+                  name:
+                    type: string
+                    description: The name of the institution.
+                  description:
+                    type: string
+                    description: A brief description of the institution.
+        '401':
+          description: Authentication failed.
+        '403':
+          description: User lacks necessary permissions.
+        '404':
+          description: Institution not found.
+
+  /v2/account/institution/users/{account_uuid}:
+    get:
+      summary: Retrieve User's Institution by Account UUID
+      description: Retrieves information about a specific user's association with an institution based on their account UUID.
+      tags:
+        - Private Institutions
+      parameters:
+        - name: account_uuid
+          in: path
+          required: true
+          description: The unique UUID of the account.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the user's institution details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  account_uuid:
+                    type: string
+                    description: The unique UUID of the account.
+                  institution_id:
+                    type: string
+                    description: The unique identifier of the institution.
+                  institution_name:
+                    type: string
+                    description: The name of the institution.
+        '401':
+          description: Authentication failed.
+        '403':
+          description: User lacks necessary permissions.
+        '404':
+          description: Account or institution not found.
+
+  /v2/account/institution/accounts:
+    get:
+      summary: Retrieve Institution Accounts
+      description: Retrieves a list of accounts associated with the user's institution within the private account context.
+      tags:
+        - Private Institutions
+      responses:
+        '200':
+          description: Successfully retrieved the list of accounts.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    account_uuid:
+                      type: string
+                      description: The unique UUID of the account.
+                    email:
+                      type: string
+                      description: The email address of the account holder.
+                    name:
+                      type: string
+                      description: The name of the account holder.
+        '401':
+          description: Authentication failed.
+        '403':
+          description: User lacks necessary permissions.
+        '500':
+          description: Internal server error.
+          
+  /v2/collections:
+    get:
+      summary: Retrieve Collections
+      description: Retrieves a list of collections available to the authenticated user or application.
+      tags:
+        - Collections
+      responses:
+        '200':
+          description: Successfully retrieved the collections.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: The unique identifier of the collection.
+                    name:
+                      type: string
+                      description: The name of the collection.
+                    description:
+                      type: string
+                      description: A brief description of the collection.
+        '401':
+          description: Authentication failed.
+        '403':
+          description: Client lacks necessary permissions.
+        '500':
+          description: Internal server error.
 
 
 components:
