@@ -1010,6 +1010,419 @@ paths:
                     description: Error message explaining that the file could not be found.
         '500':
           description: Internal server error.
+          
+  /v2/collections:
+    get:
+      summary: Retrieve Public Collections
+      description: Retrieves a list of public collections with optional filtering, sorting, and pagination.
+      tags:
+        - Public Collections
+      parameters:
+        - name: order
+          in: query
+          required: false
+          description: Field by which to sort the results.
+          schema:
+            type: string
+        - name: order_direction
+          in: query
+          required: false
+          description: Direction of sorting, either ascending or descending.
+          schema:
+            type: string
+            enum: [asc, desc]
+        - name: institution
+          in: query
+          required: false
+          description: Institution ID to filter collections.
+          schema:
+            type: integer
+        - name: published_since
+          in: query
+          required: false
+          description: Filter collections published since a specific date (YYYY-MM-DD).
+          schema:
+            type: string
+            format: date
+        - name: modified_since
+          in: query
+          required: false
+          description: Filter collections modified since a specific date (YYYY-MM-DD).
+          schema:
+            type: string
+            format: date
+        - name: group
+          in: query
+          required: false
+          description: Group ID to filter collections.
+          schema:
+            type: integer
+        - name: resource_doi
+          in: query
+          required: false
+          description: DOI of the resource to filter collections.
+          schema:
+            type: string
+        - name: doi
+          in: query
+          required: false
+          description: DOI to filter collections.
+          schema:
+            type: string
+        - name: handle
+          in: query
+          required: false
+          description: Handle to filter collections.
+          schema:
+            type: string
+        - name: offset
+          in: query
+          required: false
+          description: Number of items to skip for pagination.
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          required: false
+          description: Number of items to return for pagination.
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Successfully retrieved the list of collections.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: The unique identifier of the collection.
+                    title:
+                      type: string
+                      description: The title of the collection.
+                    description:
+                      type: string
+                      description: A brief description of the collection.
+                    institution:
+                      type: string
+                      description: The institution associated with the collection.
+                    created_at:
+                      type: string
+                      format: date-time
+                      description: The creation date of the collection.
+                    modified_at:
+                      type: string
+                      format: date-time
+                      description: The last modification date of the collection.
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message describing the validation issue.
+                  code:
+                    type: integer
+                    description: Error code for the validation issue.
+        '500':
+          description: Internal server error.
+          
+  /v2/collections/search:
+    post:
+      summary: Search Public Collections
+      description: Performs a search for public collections based on various criteria. Parameters can include filters for institution, publication date, modification date, and more.
+      tags:
+        - Public Collections
+      requestBody:
+        description: Search parameters for querying public collections. Some parameters are mandatory depending on the specific use case.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                limit:
+                  type: integer
+                  description: Number of collections to return.
+                  default: 10
+                  example: 20
+                offset:
+                  type: integer
+                  description: Number of collections to skip for pagination.
+                  example: 0
+                order:
+                  type: string
+                  description: Field by which to sort the results.
+                  example: title
+                order_direction:
+                  type: string
+                  description: Direction of sorting, either ascending or descending.
+                  enum: [asc, desc]
+                  example: asc
+                institution:
+                  type: integer
+                  description: Institution ID to filter collections.
+                  example: 5
+                published_since:
+                  type: string
+                  format: date
+                  description: Filter collections published since a specific date (YYYY-MM-DD).
+                  example: "2023-01-01"
+                modified_since:
+                  type: string
+                  format: date
+                  description: Filter collections modified since a specific date (YYYY-MM-DD).
+                  example: "2023-06-01"
+                group:
+                  type: integer
+                  description: Group ID to filter collections.
+                  example: 10
+                resource_doi:
+                  type: string
+                  description: DOI of the resource to filter collections.
+                  example: "10.1234/example.doi"
+                doi:
+                  type: string
+                  description: DOI to filter collections.
+                  example: "10.5678/another.doi"
+                handle:
+                  type: string
+                  description: Handle to filter collections.
+                  example: "hdl:20.500.12345/67890"
+                search_for:
+                  type: string
+                  description: Free text search query to filter collections.
+                  example: "climate change"
+              required:
+                - search_for
+      responses:
+        '200':
+          description: Successfully retrieved the search results.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: The unique identifier of the collection.
+                    title:
+                      type: string
+                      description: The title of the collection.
+                    description:
+                      type: string
+                      description: A brief description of the collection.
+                    institution:
+                      type: string
+                      description: The institution associated with the collection.
+                    created_at:
+                      type: string
+                      format: date-time
+                      description: The creation date of the collection.
+                    modified_at:
+                      type: string
+                      format: date-time
+                      description: The last modification date of the collection.
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message describing the validation issue.
+        '500':
+          description: Internal server error.
+          
+  
+  /v2/collections/{collection_id}:
+    get:
+      summary: Retrieve Collection Details
+      description: Retrieves detailed information about a specific public collection.
+      tags:
+        - Public Collections
+      parameters:
+        - name: collection_id
+          in: path
+          required: true
+          description: The unique identifier of the collection.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the collection details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The unique identifier of the collection.
+                  title:
+                    type: string
+                    description: The title of the collection.
+                  description:
+                    type: string
+                    description: A brief description of the collection.
+                  institution:
+                    type: string
+                    description: The institution associated with the collection.
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: The creation date of the collection.
+                  modified_at:
+                    type: string
+                    format: date-time
+                    description: The last modification date of the collection.
+                  is_published:
+                    type: boolean
+                    description: Indicates whether the collection is published.
+                  is_latest:
+                    type: boolean
+                    description: Indicates whether this is the latest version of the collection.
+        '404':
+          description: Collection not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message indicating the collection could not be found.
+        '500':
+          description: Internal server error.
+  /v2/collections/{collection_id}/versions:
+    get:
+      summary: Retrieve Collection Versions
+      description: Retrieves a list of versions for a specific collection. The `collection_id` can be provided as an integer or UUID.
+      tags:
+        - Public Collections
+      parameters:
+        - name: collection_id
+          in: path
+          required: true
+          description: The unique identifier of the collection, which can be an integer or UUID.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the list of collection versions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    version:
+                      type: string
+                      description: The version identifier of the collection.
+                    created_at:
+                      type: string
+                      format: date-time
+                      description: The creation date of the version.
+                    modified_at:
+                      type: string
+                      format: date-time
+                      description: The last modification date of the version.
+                    is_published:
+                      type: boolean
+                      description: Indicates whether the version is published.
+                    is_latest:
+                      type: boolean
+                      description: Indicates whether this version is the latest.
+        '404':
+          description: Collection not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message indicating the collection could not be found.
+        '500':
+          description: Internal server error.
+          
+  /v2/collections/{collection_id}/versions/{version}:
+    get:
+      summary: Retrieve Collection Version Details
+      description: Retrieves detailed information about a specific version of a public collection.
+      tags:
+        - Public Collections
+      parameters:
+        - name: collection_id
+          in: path
+          required: true
+          description: The unique identifier of the collection.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The version identifier of the collection.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the collection version details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The unique identifier of the collection version.
+                  version:
+                    type: string
+                    description: The version identifier of the collection.
+                  title:
+                    type: string
+                    description: The title of the collection version.
+                  description:
+                    type: string
+                    description: A brief description of the collection version.
+                  institution:
+                    type: string
+                    description: The institution associated with the collection version.
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: The creation date of the collection version.
+                  modified_at:
+                    type: string
+                    format: date-time
+                    description: The last modification date of the collection version.
+                  is_published:
+                    type: boolean
+                    description: Indicates whether the version is published.
+        '404':
+          description: Collection version not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message indicating the collection version could not be found.
+        '500':
+          description: Internal server error.
 
   ### Private API ###
   /v2/account/articles:
@@ -1293,40 +1706,7 @@ paths:
           description: User lacks necessary permissions.
         '500':
           description: Internal server error.
-          
-  /v2/collections:
-    get:
-      summary: Retrieve Collections
-      description: Retrieves a list of collections available to the authenticated user or application.
-      tags:
-        - Collections
-      responses:
-        '200':
-          description: Successfully retrieved the collections.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                      description: The unique identifier of the collection.
-                    name:
-                      type: string
-                      description: The name of the collection.
-                    description:
-                      type: string
-                      description: A brief description of the collection.
-        '401':
-          description: Authentication failed.
-        '403':
-          description: Client lacks necessary permissions.
-        '500':
-          description: Internal server error.
-
-
+  
 components:
   schemas:
     PortalSummaryData:
