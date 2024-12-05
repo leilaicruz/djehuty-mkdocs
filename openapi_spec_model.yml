@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
-  title: Djehuty API
+  title: Djehuty Web API
   version: 1.0.0
-  description: API documentation for Djehuty's public and private interfaces.
+  description: Web API documentation for Djehuty's public and private interfaces.
 
 servers:
   - url: https://cors-anywhere.herokuapp.com/https://data.4tu.nl
@@ -136,94 +136,11 @@ paths:
           description: Internal server error.
 
   /v2/articles/search:  
-    post:
+   post:
       summary: Search Datasets
       description: Performs a search for datasets based on user-specified criteria.
       tags:
         - Public Articles
-      parameters:
-        - name: order
-          in: query
-          required: false
-          description: Field by which to sort the results.
-          schema:
-            type: string
-            maxLength: 32
-        - name: order_direction
-          in: query
-          required: false
-          description: Direction of sorting, either ascending or descending.
-          schema:
-            type: string
-            enum: [asc, desc]
-        - name: institution
-          in: query
-          required: false
-          description: Institution ID to filter datasets.
-          schema:
-            type: integer
-        - name: published_since
-          in: query
-          required: false
-          description: Filter datasets published since a specific date (YYYY-MM-DD).
-          schema:
-            type: string
-            maxLength: 32
-            format: date
-        - name: modified_since
-          in: query
-          required: false
-          description: Filter datasets modified since a specific date (YYYY-MM-DD).
-          schema:
-            type: string
-            maxLength: 32
-            format: date
-        - name: group
-          in: query
-          required: false
-          description: Group ID to filter datasets.
-          schema:
-            type: integer
-        - name: resource_doi
-          in: query
-          required: false
-          description: DOI of the resource to filter datasets.
-          schema:
-            type: string
-            maxLength: 255
-        - name: item_type
-          in: query
-          required: false
-          description: Item type ID to filter datasets.
-          schema:
-            type: integer
-        - name: doi
-          in: query
-          required: false
-          description: DOI to filter datasets.
-          schema:
-            type: string
-            maxLength: 255
-        - name: handle
-          in: query
-          required: false
-          description: Unused.
-          schema:
-            type: string
-            maxLength: 255
-        - name: offset
-          in: query
-          required: false
-          description: Number of items to skip for pagination.
-          schema:
-            type: integer
-        - name: limit
-          in: query
-          required: false
-          description: Number of items to return for pagination.
-          schema:
-            type: integer
-            default: 10
       requestBody:
         description: Search parameters for querying datasets.
         required: true
@@ -232,10 +149,31 @@ paths:
             schema:
               type: object
               properties:
+                published_since:
+                  type: string
+                  format: date
+                  description: Filter datasets published since a specific date (YYYY-MM-DD).
+                  example: "2023-01-01"
+                modified_since:
+                  type: string
+                  format: date
+                  description: Filter datasets modified since a specific date (YYYY-MM-DD).
+                  example: "2023-06-01"
                 search_for:
                   type: string
-                  description: Term to search for.  
-                  example: djehuty         
+                  description: Free text search query to filter datasets.
+                  example: "climate change"
+                offset:
+                  type: integer
+                  description: Number of items to skip for pagination.
+                  example: 0
+                limit:
+                  type: integer
+                  description: Number of items to return for pagination.
+                  default: 10
+                  example: 20
+              required:
+                - search_for
       responses:
         '200':
           description: Successfully retrieved the search results.
