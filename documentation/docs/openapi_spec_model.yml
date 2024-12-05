@@ -135,10 +135,10 @@ paths:
         '500':
           description: Internal server error.
 
-  /v2/articles/search:
+  /v2/articles/search:  
     post:
       summary: Search Datasets
-      description: Performs a search for datasets based on user-specified criteria, with optional filtering and pagination.
+      description: Performs a search for datasets based on user-specified criteria.
       tags:
         - Public Articles
       parameters:
@@ -225,7 +225,7 @@ paths:
             type: integer
             default: 10
       requestBody:
-        description: Article details to create.
+        description: Search parameters for querying datasets.
         required: true
         content:
           application/json:
@@ -255,8 +255,30 @@ paths:
                     description:
                       type: string
                       description: A brief description of the dataset.
+                    institution:
+                      type: string
+                      description: The institution associated with the dataset.
+                    created_at:
+                      type: string
+                      format: date-time
+                      description: The creation date of the dataset.
+                    modified_at:
+                      type: string
+                      format: date-time
+                      description: The last modification date of the dataset.
         '400':
           description: Malformed request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message describing the validation issue.
+                  code:
+                    type: integer
+                    description: Error code for the validation issue.
         '500':
           description: Internal server error.
 
@@ -377,6 +399,7 @@ paths:
           schema:
             type: string
           example: 342efadc-66f8-4e9b-9d27-da7b28b849d2
+
       responses:
         '200':
           description: Successfully retrieved the list of dataset versions.
@@ -390,19 +413,9 @@ paths:
                     version:
                       type: string
                       description: The version identifier of the dataset.
-                    created_at:
+                    url:
                       type: string
-                      format: date-time
-                      description: The creation date of the dataset version.
-                    is_published:
-                      type: boolean
-                      description: Indicates whether the version is published.
-                    is_latest:
-                      type: boolean
-                      description: Indicates whether this is the latest version.
-                    is_under_review:
-                      type: boolean
-                      description: Indicates whether the version is under review.
+                      description: The endpoint of the dataset
         '404':
           description: Dataset not found.
         '500':
@@ -429,6 +442,7 @@ paths:
           schema:
             type: integer
           example: 1
+
       responses:
         '200':
           description: Successfully retrieved the dataset version details.
