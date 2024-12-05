@@ -426,13 +426,6 @@ paths:
           description: The version identifier of the dataset.
           schema:
             type: string
-        - name: is_published
-          in: query
-          required: false
-          description: Boolean flag to specify if only published versions should be considered.
-          schema:
-            type: boolean
-            default: true
       responses:
         '200':
           description: Successfully retrieved the dataset version details.
