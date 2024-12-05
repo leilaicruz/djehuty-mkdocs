@@ -7,11 +7,13 @@ info:
 servers:
   - url: https://cors-anywhere.herokuapp.com/https://data.4tu.nl
     description: Proxy server to bypass CORS
-  # - url: https://data.4tu.nl/
+  - url: https://data.4tu.nl/
+    description: 4TU.ResearchData repository official URL
+  - url: https://next.data.4tu.nl/
+    description: 4TU.ResearchData sandbox
+
 
 paths:
-  
-
   /v2/articles:
     get:
       summary: Retrieve Public Datasets
@@ -88,23 +90,6 @@ paths:
           schema:
             type: string
             maxLength: 255
-        - name: search_for
-          in: query
-          required: false
-          description: Search term(s) to filter datasets.
-          schema:
-            oneOf:
-              - type: string
-                maxLength: 1024
-              - type: array
-                items:
-                  type: string
-        - name: search_format
-          in: query
-          required: false
-          description: Boolean flag to search for datasets in specific formats.
-          schema:
-            type: boolean
         - name: categories
           in: query
           required: false
@@ -113,12 +98,6 @@ paths:
             type: array
             items:
               type: integer
-        - name: is_latest
-          in: query
-          required: false
-          description: Boolean flag to filter datasets by their latest version.
-          schema:
-            type: boolean
         - name: offset
           in: query
           required: false
@@ -156,13 +135,95 @@ paths:
         '500':
           description: Internal server error.
 
-  /v2/articles/search:
-    
+  /v2/articles/search:  
     post:
       summary: Search Datasets
       description: Performs a search for datasets based on user-specified criteria.
       tags:
         - Public Articles
+      parameters:
+        - name: order
+          in: query
+          required: false
+          description: Field by which to sort the results.
+          schema:
+            type: string
+            maxLength: 32
+        - name: order_direction
+          in: query
+          required: false
+          description: Direction of sorting, either ascending or descending.
+          schema:
+            type: string
+            enum: [asc, desc]
+        - name: institution
+          in: query
+          required: false
+          description: Institution ID to filter datasets.
+          schema:
+            type: integer
+        - name: published_since
+          in: query
+          required: false
+          description: Filter datasets published since a specific date (YYYY-MM-DD).
+          schema:
+            type: string
+            maxLength: 32
+            format: date
+        - name: modified_since
+          in: query
+          required: false
+          description: Filter datasets modified since a specific date (YYYY-MM-DD).
+          schema:
+            type: string
+            maxLength: 32
+            format: date
+        - name: group
+          in: query
+          required: false
+          description: Group ID to filter datasets.
+          schema:
+            type: integer
+        - name: resource_doi
+          in: query
+          required: false
+          description: DOI of the resource to filter datasets.
+          schema:
+            type: string
+            maxLength: 255
+        - name: item_type
+          in: query
+          required: false
+          description: Item type ID to filter datasets.
+          schema:
+            type: integer
+        - name: doi
+          in: query
+          required: false
+          description: DOI to filter datasets.
+          schema:
+            type: string
+            maxLength: 255
+        - name: handle
+          in: query
+          required: false
+          description: Unused.
+          schema:
+            type: string
+            maxLength: 255
+        - name: offset
+          in: query
+          required: false
+          description: Number of items to skip for pagination.
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          required: false
+          description: Number of items to return for pagination.
+          schema:
+            type: integer
+            default: 10
       requestBody:
         description: Search parameters for querying datasets.
         required: true
@@ -171,60 +232,10 @@ paths:
             schema:
               type: object
               properties:
-                # order:
-                #   type: string
-                #   description: Field by which to sort the results.
-                #   example: title
-                # order_direction:
-                #   type: string
-                #   description: Direction of sorting, either ascending or descending.
-                #   enum: [asc, desc]
-                #   example: asc
-                # institution:
-                #   type: integer
-                #   description: Institution ID to filter datasets.
-                #   example: 5
-                published_since:
-                  type: string
-                  format: date
-                  description: Filter datasets published since a specific date (YYYY-MM-DD).
-                  example: "2023-01-01"
-                modified_since:
-                  type: string
-                  format: date
-                  description: Filter datasets modified since a specific date (YYYY-MM-DD).
-                  example: "2023-06-01"
-                # group:
-                #   type: integer
-                #   description: Group ID to filter datasets.
-                #   example: 10
-                # resource_doi:
-                #   type: string
-                #   description: DOI of the resource to filter datasets.
-                #   example: "10.1234/example.doi"
-                # doi:
-                #   type: string
-                #   description: DOI to filter datasets.
-                #   example: "10.5678/another.doi"
-                # handle:
-                #   type: string
-                #   description: Handle to filter datasets.
-                #   example: "hdl:20.500.12345/67890"
                 search_for:
                   type: string
-                  description: Free text search query to filter datasets.
-                  example: "climate change"
-                offset:
-                  type: integer
-                  description: Number of items to skip for pagination.
-                  example: 0
-                limit:
-                  type: integer
-                  description: Number of items to return for pagination.
-                  default: 10
-                  example: 20
-              required:
-                - search_for
+                  description: Term to search for.  
+                  example: djehuty         
       responses:
         '200':
           description: Successfully retrieved the search results.
@@ -284,6 +295,7 @@ paths:
           description: The unique identifier of the dataset.
           schema:
             type: string
+          example:  '342efadc-66f8-4e9b-9d27-da7b28b849d2'
       responses:
         '200':
           description: Successfully retrieved the dataset details.
@@ -386,6 +398,8 @@ paths:
           description: The unique identifier of the dataset.
           schema:
             type: string
+          example: 342efadc-66f8-4e9b-9d27-da7b28b849d2
+
       responses:
         '200':
           description: Successfully retrieved the list of dataset versions.
@@ -420,12 +434,15 @@ paths:
           description: The unique identifier of the dataset.
           schema:
             type: string
+          example: 342efadc-66f8-4e9b-9d27-da7b28b849d2
         - name: version
           in: path
           required: true
           description: The version identifier of the dataset.
           schema:
-            type: string
+            type: integer
+          example: 1
+
       responses:
         '200':
           description: Successfully retrieved the dataset version details.
@@ -530,12 +547,14 @@ paths:
           description: The unique identifier of the dataset.
           schema:
             type: string
+          example: c1274889-b797-43bd-a3b1-ee0611d58fd7 
         - name: version
           in: path
           required: true
           description: The version identifier of the dataset.
           schema:
             type: string
+          example: 2  
       responses:
         '200':
           description: Successfully retrieved the embargo details.
@@ -595,80 +614,7 @@ paths:
           description: Dataset version not found.
         '500':
           description: Internal server error.
-          
-  /v2/articles/{dataset_id}/versions/{version}/confidentiality:
-    get:
-      summary: Retrieve Confidentiality Status
-      description: Retrieves the confidentiality status of a specific dataset version.
-      tags:
-        - Public Articles
-      parameters:
-        - name: dataset_id
-          in: path
-          required: true
-          description: The unique identifier of the dataset.
-          schema:
-            type: string
-        - name: version
-          in: path
-          required: true
-          description: The version identifier of the dataset.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successfully retrieved the confidentiality status.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  is_confidential:
-                    type: boolean
-                    description: Whether the version is confidential.
-        '404':
-          description: Dataset version not found.
-        '500':
-          description: Internal server error.
-    put:
-      summary: Update Confidentiality Status
-      description: Updates the confidentiality status of a specific dataset version.
-      tags:
-        - Private Articles
-      parameters:
-        - name: dataset_id
-          in: path
-          required: true
-          description: The unique identifier of the dataset.
-          schema:
-            type: string
-        - name: version
-          in: path
-          required: true
-          description: The version identifier of the dataset.
-          schema:
-            type: string
-      requestBody:
-        description: Confidentiality status to update.
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                is_confidential:
-                  type: boolean
-                  description: The new confidentiality status.
-      responses:
-        '200':
-          description: Successfully updated the confidentiality status.
-        '400':
-          description: Malformed request.
-        '404':
-          description: Dataset version not found.
-        '500':
-          description: Internal server error.
-          
+
   /v2/articles/{dataset_id}/versions/{version}/update_thumb:
     put:
       summary: Update Dataset Thumbnail
@@ -709,7 +655,7 @@ paths:
           description: Dataset version not found.
         '500':
           description: Internal server error.
-          
+
   /v2/articles/{dataset_id}/files:
     get:
       summary: Retrieve Dataset Files
@@ -721,6 +667,7 @@ paths:
           in: path
           required: true
           description: The unique identifier of the dataset.
+          example: d3e1c325-7fa9-4cb9-884e-0b9cd2059292
           schema:
             type: string
         - name: is_embargoed
@@ -755,7 +702,7 @@ paths:
                       description: The size of the file in bytes.
                     filetype:
                       type: string
-                      description: The MIME type of the file.
+                      description: The IME type of the file.
         '404':
           description: Dataset not found.
         '500':
@@ -814,7 +761,7 @@ paths:
                     description: Error message explaining that the file could not be found.
         '500':
           description: Internal server error.
-          
+
   /v2/collections:
     get:
       summary: Retrieve Public Collections
@@ -937,7 +884,7 @@ paths:
                     description: Error code for the validation issue.
         '500':
           description: Internal server error.
-          
+
   /v2/collections/search:
     post:
       summary: Search Public Collections
@@ -1048,8 +995,8 @@ paths:
                     description: Error message describing the validation issue.
         '500':
           description: Internal server error.
-          
-  
+
+
   /v2/collections/{collection_id}:
     get:
       summary: Retrieve Collection Details
@@ -1161,7 +1108,7 @@ paths:
                     description: Error message indicating the collection could not be found.
         '500':
           description: Internal server error.
-          
+
   /v2/collections/{collection_id}/versions/{version}:
     get:
       summary: Retrieve Collection Version Details
@@ -1345,7 +1292,7 @@ paths:
                     description: Legacy identifier for the dataset.
                   uuid:
                     type: string
-                    description: Unique identifier for the dataset.  
+                    description: Unique identifier for the dataset.
                   title:
                     type: string
                     description: Title of the dataset.
@@ -1357,7 +1304,7 @@ paths:
                     description: ????.
                   url:
                     type: string
-                    description: URL of the dataset.  
+                    description: URL of the dataset.
                   published_date:
                     type: string
                     format: date-time
@@ -1370,19 +1317,19 @@ paths:
                     description: 3 for dataset and 9 for software.
                   defined_type_name:
                     type: string
-                    description: Dataset or software. 
+                    description: Dataset or software.
                   group_id:
                     type: integer
-                    description: Insititution ID.  
+                    description: Insititution ID.
                   url_private_api:
                     type: string
-                    description: Private v2 API endpoint.  
+                    description: Private v2 API endpoint.
                   url_public_api:
                     type: string
-                    description: Public v2 API endpoint. 
+                    description: Public v2 API endpoint.
                   url_private_html:
                     type: string
-                    description: Private html URL. 
+                    description: Private html URL.
                   url_public_html:
                     type: string
                     description: Public html URL.
@@ -1402,7 +1349,7 @@ paths:
                       revision:
                         type: string
                         nullable: true
-                        description: The revision of the item  
+                        description: The revision of the item
         '400':
           description: Failed to decode JSON object.
         '403':
@@ -1411,7 +1358,7 @@ paths:
           description: Dataset not found.
         '415':
           description: Unsupported Media Type.
-          
+
   /v2/account/institution:
     get:
       summary: Retrieve User's Institution
@@ -1510,7 +1457,7 @@ paths:
           description: User lacks necessary permissions.
         '500':
           description: Internal server error.
-  
+
 components:
   schemas:
     PortalSummaryData:
