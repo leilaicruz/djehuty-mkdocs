@@ -7,162 +7,113 @@ info:
 servers:
   - url: https://cors-anywhere.herokuapp.com/https://data.4tu.nl
     description: Proxy server to bypass CORS
+  - url: https://data.4tu.nl/
+    description: 4TU.ResearchData repository official URL
+  - url: https://next.data.4tu.nl/
+    description: 4TU.ResearchData sandbox
+
 
 paths:
-  /portal:
-    get:
-      summary: "Retrieve the portal home page"
-      description: >
-        This endpoint serves the home page of the Djehuty portal, providing repository
-        statistics, the latest datasets, and customizable display options.
-        The response is rendered as an HTML page.
-      tags:
-        - Portal
-      parameters:
-        - in: query
-          name: show_portal_summary
-          required: false
-          schema:
-            type: boolean
-          description: >
-            Flag to indicate whether the portal summary section should be displayed.
-            Defaults to `true`.
-        - in: query
-          name: show_institutions
-          required: false
-          schema:
-            type: boolean
-          description: >
-            Flag to indicate whether institutions information should be displayed.
-            Defaults to `true`.
-        - in: query
-          name: show_science_categories
-          required: false
-          schema:
-            type: boolean
-          description: >
-            Flag to indicate whether scientific categories should be displayed.
-            Defaults to `true`.
-        - in: query
-          name: show_latest_datasets
-          required: false
-          schema:
-            type: boolean
-          description: >
-            Flag to indicate whether the latest datasets should be displayed.
-            Defaults to `true`.
-      responses:
-        '200':
-          description: "Portal home page rendered successfully"
-          content:
-            text/html:
-              schema:
-                type: string
-                example: "<html><body>...</body></html>"
-        '406':
-          description: "The client does not accept HTML responses."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Not Acceptable: The requested resource is only capable of generating HTML responses."
-        '500':
-          description: "Internal server error"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "An unexpected error occurred."
-
-
-  
   /v2/articles:
     get:
-      summary: Retrieve a list of articles
-      description: >
-        Fetches a list of publicly available articles with optional filters for
-        sorting, pagination, and specific fields like DOIs or modification dates.
+      summary: Retrieve Public Datasets
+      description: Retrieves a list of publicly available datasets (articles) with optional filtering and pagination.
       tags:
         - Public Articles
       parameters:
-        - in: query
-          name: order
+        - name: order
+          in: query
           required: false
+          description: Field by which to sort the results.
           schema:
             type: string
-            enum: 
-              - published_date
-              - title
-              - doi
-              - modified_date
-            default: published_date
-          description: >
-            Field to use for sorting. Options are:
-            - `published_date`: Sort by publication date (default).
-            - `title`: Sort by article title.
-            - `doi`: Sort by DOI.
-            - `modified_date`: Sort by last modification date.
-        - in: query
-          name: order_direction
+            maxLength: 32
+        - name: order_direction
+          in: query
+          required: false
+          description: Direction of sorting, either ascending or descending.
           schema:
             type: string
-            description: Sort direction as  `asc` or `desc`.
-        - in: query
-          name: institution
-          schema:
-            type: string
-          description: Institution identifier to filter results.
-        - in: query
-          name: published_since
-          schema:
-            type: string
-          description: >
-            Show only articles published since this date. Format: `YYYY-MM-DD`.
-        - in: query
-          name: modified_since
-          schema:
-            type: string
-          description: >
-            Show only articles modified since this date. Format: `YYYY-MM-DD`.
-        - in: query
-          name: group
-          schema:
-            type: string
-          description: Filter results by group identifier.
-        - in: query
-          name: resource_doi
-          schema:
-            type: string
-          description: Filter results by DOI of associated journal publication.
-        - in: query
-          name: item_type
+            enum: [asc, desc]
+        - name: institution
+          in: query
+          required: false
+          description: Institution ID to filter datasets.
           schema:
             type: integer
-          description: Type of items to return `3` for datasets, `9` for software.
-        - in: query
-          name: doi
+        - name: published_since
+          in: query
+          required: false
+          description: Filter datasets published since a specific date (YYYY-MM-DD).
           schema:
             type: string
-          description: Filter results by dataset DOI.
-        - in: query
-          name: page
+            maxLength: 32
+            format: date
+        - name: modified_since
+          in: query
+          required: false
+          description: Filter datasets modified since a specific date (YYYY-MM-DD).
+          schema:
+            type: string
+            maxLength: 32
+            format: date
+        - name: group
+          in: query
+          required: false
+          description: Group ID to filter datasets.
           schema:
             type: integer
-          description: Page number for pagination.
-        - in: query
-          name: page_size
+        - name: resource_doi
+          in: query
+          required: false
+          description: DOI of the resource to filter datasets.
+          schema:
+            type: string
+            maxLength: 255
+        - name: item_type
+          in: query
+          required: false
+          description: Item type ID to filter datasets.
           schema:
             type: integer
-          description: Number of results per page.
+        - name: doi
+          in: query
+          required: false
+          description: DOI to filter datasets.
+          schema:
+            type: string
+            maxLength: 255
+        - name: handle
+          in: query
+          required: false
+          description: Handle to filter datasets.
+          schema:
+            type: string
+            maxLength: 255
+        - name: categories
+          in: query
+          required: false
+          description: Comma-separated list of category IDs to filter datasets.
+          schema:
+            type: array
+            items:
+              type: integer
+        - name: offset
+          in: query
+          required: false
+          description: Number of items to skip for pagination.
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          required: false
+          description: Number of items to return for pagination.
+          schema:
+            type: integer
+            default: 10
       responses:
         '200':
-          description: A list of articles
+          description: Successfully retrieved the list of datasets.
           content:
             application/json:
               schema:
@@ -170,43 +121,184 @@ paths:
                 items:
                   type: object
                   properties:
-                    uuid:
+                    id:
                       type: string
-                      description: Unique identifier for the article.
+                      description: The unique identifier of the dataset.
                     title:
                       type: string
-                      description: Title of the article.
-                    doi:
+                      description: The title of the dataset.
+                    description:
                       type: string
-                      description: DOI of the article.
-                    published_date:
-                      type: string
-                      format: date-time
-                      description: Publication date of the article.
+                      description: A brief description of the dataset.
         '400':
-          description: Invalid request parameters.
-        '401':
-          description: Unauthorized. Missing or invalid credentials.
+          description: Malformed request.
         '500':
           description: Internal server error.
 
-  /v2/articles/{dataset-id}:
-    get:
-      summary: Retrieve dataset details
-      description: >
-        Retrieves detailed information about a specific dataset by its ID.
+  /v2/articles/search:  
+    post:
+      summary: Search Datasets
+      description: Performs a search for datasets based on user-specified criteria.
       tags:
         - Public Articles
       parameters:
-        - in: path
-          name: dataset-id
-          required: true
+        - name: order
+          in: query
+          required: false
+          description: Field by which to sort the results.
           schema:
             type: string
-          description: Unique identifier of the dataset.
+            maxLength: 32
+        - name: order_direction
+          in: query
+          required: false
+          description: Direction of sorting, either ascending or descending.
+          schema:
+            type: string
+            enum: [asc, desc]
+        - name: institution
+          in: query
+          required: false
+          description: Institution ID to filter datasets.
+          schema:
+            type: integer
+        - name: published_since
+          in: query
+          required: false
+          description: Filter datasets published since a specific date (YYYY-MM-DD).
+          schema:
+            type: string
+            maxLength: 32
+            format: date
+        - name: modified_since
+          in: query
+          required: false
+          description: Filter datasets modified since a specific date (YYYY-MM-DD).
+          schema:
+            type: string
+            maxLength: 32
+            format: date
+        - name: group
+          in: query
+          required: false
+          description: Group ID to filter datasets.
+          schema:
+            type: integer
+        - name: resource_doi
+          in: query
+          required: false
+          description: DOI of the resource to filter datasets.
+          schema:
+            type: string
+            maxLength: 255
+        - name: item_type
+          in: query
+          required: false
+          description: Item type ID to filter datasets.
+          schema:
+            type: integer
+        - name: doi
+          in: query
+          required: false
+          description: DOI to filter datasets.
+          schema:
+            type: string
+            maxLength: 255
+        - name: handle
+          in: query
+          required: false
+          description: Unused.
+          schema:
+            type: string
+            maxLength: 255
+        - name: offset
+          in: query
+          required: false
+          description: Number of items to skip for pagination.
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          required: false
+          description: Number of items to return for pagination.
+          schema:
+            type: integer
+            default: 10
+      requestBody:
+        description: Search parameters for querying datasets.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                search_for:
+                  type: string
+                  description: Term to search for.  
+                  example: djehuty         
       responses:
         '200':
-          description: Dataset details
+          description: Successfully retrieved the search results.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: The unique identifier of the dataset.
+                    title:
+                      type: string
+                      description: The title of the dataset.
+                    description:
+                      type: string
+                      description: A brief description of the dataset.
+                    institution:
+                      type: string
+                      description: The institution associated with the dataset.
+                    created_at:
+                      type: string
+                      format: date-time
+                      description: The creation date of the dataset.
+                    modified_at:
+                      type: string
+                      format: date-time
+                      description: The last modification date of the dataset.
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message describing the validation issue.
+                  code:
+                    type: integer
+                    description: Error code for the validation issue.
+        '500':
+          description: Internal server error.
+
+  /v2/articles/{dataset_id}:
+    get:
+      summary: Retrieve Dataset Details
+      description: Retrieves detailed information about a specific dataset, including its authors, files, custom fields, tags, categories, references, and funding details.
+      tags:
+        - Public Articles
+      parameters:
+        - name: dataset_id
+          in: path
+          required: true
+          description: The unique identifier of the dataset.
+          schema:
+            type: string
+          example:  '342efadc-66f8-4e9b-9d27-da7b28b849d2'
+      responses:
+        '200':
+          description: Successfully retrieved the dataset details.
           content:
             application/json:
               schema:
@@ -214,27 +306,876 @@ paths:
                 properties:
                   id:
                     type: string
-                    description: Unique identifier for the dataset.
+                    description: The unique identifier of the dataset.
                   title:
                     type: string
-                    description: Title of the dataset.
-                  doi:
-                    type: string
-                    description: DOI of the dataset.
+                    description: The title of the dataset.
                   description:
                     type: string
-                    description: Description of the dataset.
-                  published_date:
-                    type: string
-                    format: date-time
-                    description: Publication date.
-        '400':
-          description: Invalid dataset ID.
-        '401':
-          description: Unauthorized. Missing or invalid credentials.
+                    description: A detailed description of the dataset.
+                  authors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: The name of the author.
+                        affiliation:
+                          type: string
+                          description: The affiliation of the author.
+                  files:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        filename:
+                          type: string
+                          description: The name of the file.
+                        filesize:
+                          type: integer
+                          description: The size of the file in bytes.
+                  custom_fields:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: The name of the custom field.
+                        value:
+                          type: string
+                          description: The value of the custom field.
+                  tags:
+                    type: array
+                    items:
+                      type: string
+                  categories:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          description: The category ID.
+                        name:
+                          type: string
+                          description: The name of the category.
+                  references:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        reference:
+                          type: string
+                          description: The reference text.
+                  funding:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        funder:
+                          type: string
+                          description: The name of the funding organization.
+                        grant:
+                          type: string
+                          description: The grant associated with the funding.
         '404':
           description: Dataset not found.
+        '500':
+          description: Internal server error.
 
+  /v2/articles/{dataset_id}/versions:
+    get:
+      summary: Retrieve Dataset Versions
+      description: Retrieves a list of versions for a specific dataset, with optional filters for published, latest, or under-review versions.
+      tags:
+        - Public Articles
+      parameters:
+        - name: dataset_id
+          in: path
+          required: true
+          description: The unique identifier of the dataset.
+          schema:
+            type: string
+          example: 342efadc-66f8-4e9b-9d27-da7b28b849d2
+
+      responses:
+        '200':
+          description: Successfully retrieved the list of dataset versions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    version:
+                      type: string
+                      description: The version identifier of the dataset.
+                    url:
+                      type: string
+                      description: The endpoint of the dataset
+        '404':
+          description: Dataset not found.
+        '500':
+          description: Internal server error.
+
+  /v2/articles/{dataset_id}/versions/{version}:
+    get:
+      summary: Retrieve Dataset Version Details
+      description: Retrieves detailed information about a specific version of a dataset, including its authors, files, custom fields, tags, categories, references, and funding details.
+      tags:
+        - Public Articles
+      parameters:
+        - name: dataset_id
+          in: path
+          required: true
+          description: The unique identifier of the dataset.
+          schema:
+            type: string
+          example: 342efadc-66f8-4e9b-9d27-da7b28b849d2
+        - name: version
+          in: path
+          required: true
+          description: The version identifier of the dataset.
+          schema:
+            type: integer
+          example: 1
+
+      responses:
+        '200':
+          description: Successfully retrieved the dataset version details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The unique identifier of the dataset.
+                  version:
+                    type: string
+                    description: The version identifier of the dataset.
+                  title:
+                    type: string
+                    description: The title of the dataset.
+                  description:
+                    type: string
+                    description: A detailed description of the dataset.
+                  authors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: The name of the author.
+                        affiliation:
+                          type: string
+                          description: The affiliation of the author.
+                  files:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        filename:
+                          type: string
+                          description: The name of the file.
+                        filesize:
+                          type: integer
+                          description: The size of the file in bytes.
+                  custom_fields:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: The name of the custom field.
+                        value:
+                          type: string
+                          description: The value of the custom field.
+                  tags:
+                    type: array
+                    items:
+                      type: string
+                  categories:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          description: The category ID.
+                        name:
+                          type: string
+                          description: The name of the category.
+                  references:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        reference:
+                          type: string
+                          description: The reference text.
+                  funding:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        funder:
+                          type: string
+                          description: The name of the funding organization.
+                        grant:
+                          type: string
+                          description: The grant associated with the funding.
+        '404':
+          description: Dataset version not found.
+        '500':
+          description: Internal server error.
+  /v2/articles/{dataset_id}/versions/{version}/embargo:
+    get:
+      summary: Retrieve Embargo Details
+      description: Retrieves the embargo status of a specific dataset version.
+      tags:
+        - Public Articles
+      parameters:
+        - name: dataset_id
+          in: path
+          required: true
+          description: The unique identifier of the dataset.
+          schema:
+            type: string
+          example: c1274889-b797-43bd-a3b1-ee0611d58fd7 
+        - name: version
+          in: path
+          required: true
+          description: The version identifier of the dataset.
+          schema:
+            type: string
+          example: 2  
+      responses:
+        '200':
+          description: Successfully retrieved the embargo details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  embargo_until:
+                    type: string
+                    format: date-time
+                    description: The date and time until the embargo is active.
+                  status:
+                    type: string
+                    enum: [active, inactive]
+                    description: The status of the embargo.
+        '404':
+          description: Dataset version not found.
+        '500':
+          description: Internal server error.
+    put:
+      summary: Update Embargo Details
+      description: Updates the embargo status of a specific dataset version.
+      tags:
+        - Private Articles
+      parameters:
+        - name: dataset_id
+          in: path
+          required: true
+          description: The unique identifier of the dataset.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The version identifier of the dataset.
+          schema:
+            type: string
+      requestBody:
+        description: Embargo details to update.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                embargo_until:
+                  type: string
+                  format: date-time
+                  description: The new embargo end date.
+      responses:
+        '200':
+          description: Successfully updated the embargo details.
+        '400':
+          description: Malformed request.
+        '404':
+          description: Dataset version not found.
+        '500':
+          description: Internal server error.
+
+  /v2/articles/{dataset_id}/versions/{version}/update_thumb:
+    put:
+      summary: Update Dataset Thumbnail
+      description: Updates the thumbnail image of a specific dataset version.
+      tags:
+        - Private Articles
+      parameters:
+        - name: dataset_id
+          in: path
+          required: true
+          description: The unique identifier of the dataset.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The version identifier of the dataset.
+          schema:
+            type: string
+      requestBody:
+        description: Thumbnail image file to upload.
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                thumbnail:
+                  type: string
+                  format: binary
+                  description: The new thumbnail image file.
+      responses:
+        '200':
+          description: Successfully updated the thumbnail.
+        '400':
+          description: Malformed request.
+        '404':
+          description: Dataset version not found.
+        '500':
+          description: Internal server error.
+
+  /v2/articles/{dataset_id}/files:
+    get:
+      summary: Retrieve Dataset Files
+      description: Retrieves a list of files associated with a specific dataset. If the dataset is embargoed or restricted, the file list will be empty.
+      tags:
+        - Public Articles
+      parameters:
+        - name: dataset_id
+          in: path
+          required: true
+          description: The unique identifier of the dataset.
+          example: d3e1c325-7fa9-4cb9-884e-0b9cd2059292
+          schema:
+            type: string
+        - name: is_embargoed
+          in: query
+          required: false
+          description: Boolean flag indicating whether the dataset is under embargo.
+          schema:
+            type: boolean
+            default: false
+        - name: is_restricted
+          in: query
+          required: false
+          description: Boolean flag indicating whether the dataset is restricted.
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Successfully retrieved the list of files. If embargoed or restricted, the list is empty.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    filename:
+                      type: string
+                      description: The name of the file.
+                    filesize:
+                      type: integer
+                      description: The size of the file in bytes.
+                    filetype:
+                      type: string
+                      description: The IME type of the file.
+        '404':
+          description: Dataset not found.
+        '500':
+          description: Internal server error.
+  /v2/articles/{dataset_id}/files/{file_id}:
+    get:
+      summary: Retrieve File Details
+      description: Retrieves detailed information about a specific file associated with a dataset. If the file or dataset cannot be found, a 404 error is returned.
+      tags:
+        - Public Articles
+      parameters:
+        - name: dataset_id
+          in: path
+          required: true
+          description: The unique identifier of the dataset.
+          schema:
+            type: string
+        - name: file_id
+          in: path
+          required: true
+          description: The unique identifier of the file.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the file details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  filename:
+                    type: string
+                    description: The name of the file.
+                  filesize:
+                    type: integer
+                    description: The size of the file in bytes.
+                  filetype:
+                    type: string
+                    description: The MIME type of the file.
+                  download_url:
+                    type: string
+                    description: The URL for downloading the file.
+                  base_url:
+                    type: string
+                    description: The base URL of the API.
+        '404':
+          description: File or dataset not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message explaining that the file could not be found.
+        '500':
+          description: Internal server error.
+
+  /v2/collections:
+    get:
+      summary: Retrieve Public Collections
+      description: Retrieves a list of public collections with optional filtering, sorting, and pagination.
+      tags:
+        - Public Collections
+      parameters:
+        - name: order
+          in: query
+          required: false
+          description: Field by which to sort the results.
+          schema:
+            type: string
+        - name: order_direction
+          in: query
+          required: false
+          description: Direction of sorting, either ascending or descending.
+          schema:
+            type: string
+            enum: [asc, desc]
+        - name: institution
+          in: query
+          required: false
+          description: Institution ID to filter collections.
+          schema:
+            type: integer
+        - name: published_since
+          in: query
+          required: false
+          description: Filter collections published since a specific date (YYYY-MM-DD).
+          schema:
+            type: string
+            format: date
+        - name: modified_since
+          in: query
+          required: false
+          description: Filter collections modified since a specific date (YYYY-MM-DD).
+          schema:
+            type: string
+            format: date
+        - name: group
+          in: query
+          required: false
+          description: Group ID to filter collections.
+          schema:
+            type: integer
+        - name: resource_doi
+          in: query
+          required: false
+          description: DOI of the resource to filter collections.
+          schema:
+            type: string
+        - name: doi
+          in: query
+          required: false
+          description: DOI to filter collections.
+          schema:
+            type: string
+        - name: handle
+          in: query
+          required: false
+          description: Handle to filter collections.
+          schema:
+            type: string
+        - name: offset
+          in: query
+          required: false
+          description: Number of items to skip for pagination.
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          required: false
+          description: Number of items to return for pagination.
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Successfully retrieved the list of collections.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: The unique identifier of the collection.
+                    title:
+                      type: string
+                      description: The title of the collection.
+                    description:
+                      type: string
+                      description: A brief description of the collection.
+                    institution:
+                      type: string
+                      description: The institution associated with the collection.
+                    created_at:
+                      type: string
+                      format: date-time
+                      description: The creation date of the collection.
+                    modified_at:
+                      type: string
+                      format: date-time
+                      description: The last modification date of the collection.
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message describing the validation issue.
+                  code:
+                    type: integer
+                    description: Error code for the validation issue.
+        '500':
+          description: Internal server error.
+
+  /v2/collections/search:
+    post:
+      summary: Search Public Collections
+      description: Performs a search for public collections based on various criteria. Parameters can include filters for institution, publication date, modification date, and more.
+      tags:
+        - Public Collections
+      requestBody:
+        description: Search parameters for querying public collections. Some parameters are mandatory depending on the specific use case.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                limit:
+                  type: integer
+                  description: Number of collections to return.
+                  default: 10
+                  example: 20
+                offset:
+                  type: integer
+                  description: Number of collections to skip for pagination.
+                  example: 0
+                order:
+                  type: string
+                  description: Field by which to sort the results.
+                  example: title
+                order_direction:
+                  type: string
+                  description: Direction of sorting, either ascending or descending.
+                  enum: [asc, desc]
+                  example: asc
+                institution:
+                  type: integer
+                  description: Institution ID to filter collections.
+                  example: 5
+                published_since:
+                  type: string
+                  format: date
+                  description: Filter collections published since a specific date (YYYY-MM-DD).
+                  example: "2023-01-01"
+                modified_since:
+                  type: string
+                  format: date
+                  description: Filter collections modified since a specific date (YYYY-MM-DD).
+                  example: "2023-06-01"
+                group:
+                  type: integer
+                  description: Group ID to filter collections.
+                  example: 10
+                resource_doi:
+                  type: string
+                  description: DOI of the resource to filter collections.
+                  example: "10.1234/example.doi"
+                doi:
+                  type: string
+                  description: DOI to filter collections.
+                  example: "10.5678/another.doi"
+                handle:
+                  type: string
+                  description: Handle to filter collections.
+                  example: "hdl:20.500.12345/67890"
+                search_for:
+                  type: string
+                  description: Free text search query to filter collections.
+                  example: "climate change"
+              required:
+                - search_for
+      responses:
+        '200':
+          description: Successfully retrieved the search results.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: The unique identifier of the collection.
+                    title:
+                      type: string
+                      description: The title of the collection.
+                    description:
+                      type: string
+                      description: A brief description of the collection.
+                    institution:
+                      type: string
+                      description: The institution associated with the collection.
+                    created_at:
+                      type: string
+                      format: date-time
+                      description: The creation date of the collection.
+                    modified_at:
+                      type: string
+                      format: date-time
+                      description: The last modification date of the collection.
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message describing the validation issue.
+        '500':
+          description: Internal server error.
+
+
+  /v2/collections/{collection_id}:
+    get:
+      summary: Retrieve Collection Details
+      description: Retrieves detailed information about a specific public collection.
+      tags:
+        - Public Collections
+      parameters:
+        - name: collection_id
+          in: path
+          required: true
+          description: The unique identifier of the collection.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the collection details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The unique identifier of the collection.
+                  title:
+                    type: string
+                    description: The title of the collection.
+                  description:
+                    type: string
+                    description: A brief description of the collection.
+                  institution:
+                    type: string
+                    description: The institution associated with the collection.
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: The creation date of the collection.
+                  modified_at:
+                    type: string
+                    format: date-time
+                    description: The last modification date of the collection.
+                  is_published:
+                    type: boolean
+                    description: Indicates whether the collection is published.
+                  is_latest:
+                    type: boolean
+                    description: Indicates whether this is the latest version of the collection.
+        '404':
+          description: Collection not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message indicating the collection could not be found.
+        '500':
+          description: Internal server error.
+  /v2/collections/{collection_id}/versions:
+    get:
+      summary: Retrieve Collection Versions
+      description: Retrieves a list of versions for a specific collection. The `collection_id` can be provided as an integer or UUID.
+      tags:
+        - Public Collections
+      parameters:
+        - name: collection_id
+          in: path
+          required: true
+          description: The unique identifier of the collection, which can be an integer or UUID.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the list of collection versions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    version:
+                      type: string
+                      description: The version identifier of the collection.
+                    created_at:
+                      type: string
+                      format: date-time
+                      description: The creation date of the version.
+                    modified_at:
+                      type: string
+                      format: date-time
+                      description: The last modification date of the version.
+                    is_published:
+                      type: boolean
+                      description: Indicates whether the version is published.
+                    is_latest:
+                      type: boolean
+                      description: Indicates whether this version is the latest.
+        '404':
+          description: Collection not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message indicating the collection could not be found.
+        '500':
+          description: Internal server error.
+
+  /v2/collections/{collection_id}/versions/{version}:
+    get:
+      summary: Retrieve Collection Version Details
+      description: Retrieves detailed information about a specific version of a public collection.
+      tags:
+        - Public Collections
+      parameters:
+        - name: collection_id
+          in: path
+          required: true
+          description: The unique identifier of the collection.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The version identifier of the collection.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the collection version details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The unique identifier of the collection version.
+                  version:
+                    type: string
+                    description: The version identifier of the collection.
+                  title:
+                    type: string
+                    description: The title of the collection version.
+                  description:
+                    type: string
+                    description: A brief description of the collection version.
+                  institution:
+                    type: string
+                    description: The institution associated with the collection version.
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: The creation date of the collection version.
+                  modified_at:
+                    type: string
+                    format: date-time
+                    description: The last modification date of the collection version.
+                  is_published:
+                    type: boolean
+                    description: Indicates whether the version is published.
+        '404':
+          description: Collection version not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message indicating the collection version could not be found.
+        '500':
+          description: Internal server error.
+
+  ### Private API ###
   /v2/account/articles:
     get:
       summary: Retrieve private articles
@@ -351,7 +1292,7 @@ paths:
                     description: Legacy identifier for the dataset.
                   uuid:
                     type: string
-                    description: Unique identifier for the dataset.  
+                    description: Unique identifier for the dataset.
                   title:
                     type: string
                     description: Title of the dataset.
@@ -363,7 +1304,7 @@ paths:
                     description: ????.
                   url:
                     type: string
-                    description: URL of the dataset.  
+                    description: URL of the dataset.
                   published_date:
                     type: string
                     format: date-time
@@ -376,19 +1317,19 @@ paths:
                     description: 3 for dataset and 9 for software.
                   defined_type_name:
                     type: string
-                    description: Dataset or software. 
+                    description: Dataset or software.
                   group_id:
                     type: integer
-                    description: Insititution ID.  
+                    description: Insititution ID.
                   url_private_api:
                     type: string
-                    description: Private v2 API endpoint.  
+                    description: Private v2 API endpoint.
                   url_public_api:
                     type: string
-                    description: Public v2 API endpoint. 
+                    description: Public v2 API endpoint.
                   url_private_html:
                     type: string
-                    description: Private html URL. 
+                    description: Private html URL.
                   url_public_html:
                     type: string
                     description: Public html URL.
@@ -408,7 +1349,7 @@ paths:
                       revision:
                         type: string
                         nullable: true
-                        description: The revision of the item  
+                        description: The revision of the item
         '400':
           description: Failed to decode JSON object.
         '403':
@@ -416,8 +1357,106 @@ paths:
         '404':
           description: Dataset not found.
         '415':
-          description: Unsupported Media Type.  
+          description: Unsupported Media Type.
 
+  /v2/account/institution:
+    get:
+      summary: Retrieve User's Institution
+      description: Retrieves information about the user's associated institution within the private account context.
+      tags:
+        - Private Institutions
+      responses:
+        '200':
+          description: Successfully retrieved the institution details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  institution_id:
+                    type: string
+                    description: The unique identifier of the institution.
+                  name:
+                    type: string
+                    description: The name of the institution.
+                  description:
+                    type: string
+                    description: A brief description of the institution.
+        '401':
+          description: Authentication failed.
+        '403':
+          description: User lacks necessary permissions.
+        '404':
+          description: Institution not found.
+
+  /v2/account/institution/users/{account_uuid}:
+    get:
+      summary: Retrieve User's Institution by Account UUID
+      description: Retrieves information about a specific user's association with an institution based on their account UUID.
+      tags:
+        - Private Institutions
+      parameters:
+        - name: account_uuid
+          in: path
+          required: true
+          description: The unique UUID of the account.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the user's institution details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  account_uuid:
+                    type: string
+                    description: The unique UUID of the account.
+                  institution_id:
+                    type: string
+                    description: The unique identifier of the institution.
+                  institution_name:
+                    type: string
+                    description: The name of the institution.
+        '401':
+          description: Authentication failed.
+        '403':
+          description: User lacks necessary permissions.
+        '404':
+          description: Account or institution not found.
+
+  /v2/account/institution/accounts:
+    get:
+      summary: Retrieve Institution Accounts
+      description: Retrieves a list of accounts associated with the user's institution within the private account context.
+      tags:
+        - Private Institutions
+      responses:
+        '200':
+          description: Successfully retrieved the list of accounts.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    account_uuid:
+                      type: string
+                      description: The unique UUID of the account.
+                    email:
+                      type: string
+                      description: The email address of the account holder.
+                    name:
+                      type: string
+                      description: The name of the account holder.
+        '401':
+          description: Authentication failed.
+        '403':
+          description: User lacks necessary permissions.
+        '500':
+          description: Internal server error.
 
 components:
   schemas:
