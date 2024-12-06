@@ -322,7 +322,75 @@ paths:
           description: Dataset not found.
         '500':
           description: Internal server error.
-
+  
+  /v2/categories:
+    get:
+      summary: Retrieve repository categories.
+      description: Retrieves categories used to categorize datasets and collections.
+      tags:
+        - Other
+      responses:
+        '200':
+          description: Successfully retrieved the list of categories.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID of category.
+                  uuid:
+                    type: string
+                    description: Unique identifier of category.  
+                  title:
+                    type: string
+                    description: Category title.
+                  parent_id:
+                    type: integer
+                    description: ID of parent category.
+                  parent_uuid:
+                    type: string
+                    description: Unique identifier of parent category.  
+                  path:
+                    type: string
+                    description: Unused.  
+                  source_id:
+                    type: integer
+                    description: Unused.    
+                  taxonomy_id:
+                    type: integer
+                    description: Unused.   
+        '500':
+          description: Internal server error.
+  /v2/licenses:
+    get:
+      summary: Retrieve repository license list.
+      description: Retrieves licenses available in the repository.
+      tags:
+        - Other
+      responses:
+        '200':
+          description: Successfully retrieved the list of licenses.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: integer
+                    description: ID of license.
+                  name:
+                    type: string
+                    description: Name of license.  
+                  url:
+                    type: string
+                    description: URL to license definition.
+                  type:
+                    type: string
+                    description: Type of resource it should be used for.
+        '500':
+          description: Internal server error.
   /v2/articles/{dataset_id}/versions:
     get:
       summary: Retrieve Dataset Versions
