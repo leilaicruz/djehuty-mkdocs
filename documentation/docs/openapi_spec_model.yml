@@ -4,6 +4,31 @@ info:
   version: 1.0.0
   description: Web API documentation for Djehuty's public and private interfaces.
 
+
+tags:
+  - name: Public Articles
+    description: |
+      Endpoints related to publicly available articles.
+  - name: Public Collections
+    description: |
+      Endpoints related to publicly available collections.
+  - name: Other
+    description: |
+      Other publicly available endpoints.
+  - name: Private Articles
+    description: |
+      Endpoints related to private articles of authenticated user. 
+  - name: Private Collections
+    description: |
+     Endpoints related to private collections of authenticated user.  
+  - name: Private Institutions
+    description: |
+      Endpoints related to private institutions of authenticated user.       
+  - name: Authors
+    description: |
+      Endpoints related to dataset authors.          
+     
+      
 servers:
   - url: https://cors-anywhere.herokuapp.com/https://data.4tu.nl
     description: Proxy server to bypass CORS
